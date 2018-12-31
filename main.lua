@@ -36,6 +36,8 @@ ball = {
     }
 }
 
+gameOver = false
+
 function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
     w = 0.5 * (w1 + w2)
     h = 0.5 * (h1 + h2)
@@ -101,7 +103,12 @@ function updateBall(dt)
     if checkCollision(ball.x, ball.y, ball.radius * 2, ball.radius * 2, 
                      pad.x, pad.y, pad.width, pad.height) then
         ball.y = pad.y - ball.radius * 2
-        ball.velocity.y = -ball.velocity.y
+        ball.velocity.y = -1 * math.abs(ball.velocity.y)
+        newVelocity = ball.x - pad.x
+        if newVelocity > pad.width then newVelocity = pad.width end
+        if newVelocity < 0 then newVelocity = 0 end
+        newVelocity = (newVelocity - pad.width/2) * 2 / pad.width
+        ball.velocity.x = newVelocity * BALL_VELOCITY
     end
 
     for i = #blocks, 1, -1 do
@@ -134,10 +141,17 @@ function updateBall(dt)
         ball.velocity.y = -ball.velocity.y
     end
     if ball.y > SCREEN_HEIGHT - ball.radius * 2 then
-        ball.y =  SCREEN_HEIGHT - ball.radius * 2
-        ball.velocity.y = -ball.velocity.y
+        loser = true
+        gameOver = true
     end
 
+end
+
+function checkObjective()
+    if #blocks == 0 then
+        winner = true
+        gameOver = true
+    end
 end
 
 function love.load()
@@ -147,8 +161,12 @@ function love.load()
 end
 
 function love.update(dt)
-    updatePad(dt)
-    updateBall(dt)
+
+    if not gameOver then
+        updatePad(dt)
+        updateBall(dt)
+        checkObjective()
+    end
 end
 
 function love.draw()
@@ -161,4 +179,12 @@ function love.draw()
     love.graphics.setColor(255,255,255)
 
     love.graphics.circle("fill", ball.x + ball.radius, ball.y + ball.radius, ball.radius)
+
+    if winner then
+        love.graphics.print("Vencedor")    
+    end
+
+    if loser then
+        love.graphics.print("Perdedor")
+    end
 end
