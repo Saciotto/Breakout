@@ -1,5 +1,6 @@
 
 require "brick"
+require "ball"
 
 SCREEN_WIDTH  = 480
 SCREEN_HEIGHT = 320
@@ -12,7 +13,6 @@ PAD_VELOCITY = 300
 NO_COLS = 20
 NO_ROWS = 10
 
-BALL_RADIUS = 5
 BALL_MARGIN = 5
 BALL_VELOCITY = 100
 
@@ -25,16 +25,6 @@ pad = {
 }
 
 blocks = {}
-
-ball = {
-    x = (SCREEN_WIDTH) / 2 - BALL_RADIUS,
-    y = SCREEN_HEIGHT - PAD_HEIGHT - PAD_MARGIN - BALL_MARGIN - BALL_RADIUS * 2,
-    radius = BALL_RADIUS,
-    velocity = { 
-        x = BALL_VELOCITY, 
-        y = BALL_VELOCITY 
-    }
-}
 
 gameOver = false
 
@@ -94,36 +84,23 @@ function updatePad(dt)
 end
 
 function updateBall(dt)
-    ball.x = ball.x + ball.velocity.x * dt
-    ball.y = ball.y + ball.velocity.y * dt
 
-    if checkCollision(ball.x, ball.y, ball.radius * 2, ball.radius * 2, 
-                     pad.x, pad.y, pad.width, pad.height) then
-        ball.y = pad.y - ball.radius * 2
-        ball.velocity.y = -1 * math.abs(ball.velocity.y)
-        newVelocity = ball.x - pad.x
-        if newVelocity > pad.width then newVelocity = pad.width end
-        if newVelocity < 0 then newVelocity = 0 end
-        newVelocity = (newVelocity - pad.width/2) * 2 / pad.width
-        ball.velocity.x = newVelocity * BALL_VELOCITY
+    ball:update(dt)
+
+    if checkCollision(ball.x, ball.y, ball.width, ball.height, 
+                      pad.x, pad.y, pad.width, pad.height) then
+        ball.y = pad.y - ball.height
+        local cos = ((ball.x + ball.width / 2) - pad.x) / pad.width
+        if (cos < 0) then cos = 0 end
+        if (cos > 1) then cos = 1 end
+        cos = cos - 0.5
+        ball:hitPad(cos)
     end
 
     for i = #blocks, 1, -1 do
-        ret, side =  checkCollision(blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height,ball.x, ball.y, ball.radius * 2, ball.radius * 2)
+        ret, side =  checkCollision(ball.x, ball.y, ball.width, ball.height, blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height)
         if ret then
-            if side == "bottom" then
-                ball.velocity.y = math.abs(ball.velocity.y)
-                ball.y = blocks[i].y + blocks[i].height
-            elseif side == "top" then
-                ball.velocity.y = -1 * math.abs(ball.velocity.y)
-                ball.y = blocks[i].y - (ball.radius * 2)
-            elseif side == "right" then
-                ball.velocity.x = math.abs(ball.velocity.x)
-                ball.x = blocks[i].x + blocks[i].width
-            else
-                ball.velocity.x = -1 * math.abs(ball.velocity.x)
-                ball.x = blocks[i].x - (ball.radius * 2)
-            end
+            ball:hit(side)
             blocks[i]:hit()
             if blocks[i].isBroken then
                 table.remove(blocks, i)
@@ -133,18 +110,18 @@ function updateBall(dt)
 
     if ball.x < 0 then
         ball.x = 0
-        ball.velocity.x = -ball.velocity.x
+        ball:hit("left")
     end
-    if ball.x > SCREEN_WIDTH - ball.radius * 2 then
-        ball.x =  SCREEN_WIDTH - ball.radius * 2
-        ball.velocity.x = -ball.velocity.x
+    if ball.x > SCREEN_WIDTH - ball.width then
+        ball.x =  SCREEN_WIDTH - ball.width
+        ball:hit("right")
     end
 
     if ball.y < 0 then
         ball.y = 0
-        ball.velocity.y = -ball.velocity.y
+        ball:hit("top")
     end
-    if ball.y > SCREEN_HEIGHT - ball.radius * 2 then
+    if ball.y > SCREEN_HEIGHT - ball.height then
         loser = true
         gameOver = true
     end
@@ -162,6 +139,10 @@ function love.load()
     love.window.setMode(SCREEN_WIDTH, SCREEN_HEIGHT, {resizable = false})
     love.window.setTitle("Breakout")
     createBlocks()
+
+    local ballX = (SCREEN_WIDTH - PAD_WIDTH) / 2
+    local ballY = SCREEN_HEIGHT - PAD_HEIGHT - PAD_MARGIN - BALL_MARGIN - BALL_RADIUS * 2
+    ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY)
 end
 
 function love.update(dt)
@@ -181,7 +162,7 @@ function love.draw()
     end
     love.graphics.setColor(255,255,255)
 
-    love.graphics.circle("fill", ball.x + ball.radius, ball.y + ball.radius, ball.radius)
+    ball:draw()
 
     if winner then
         love.graphics.print("Vencedor")    
