@@ -1,4 +1,6 @@
 
+require "brick"
+
 SCREEN_WIDTH  = 480
 SCREEN_HEIGHT = 320
 
@@ -7,8 +9,6 @@ PAD_HEIGHT = 10
 PAD_MARGIN = 10
 PAD_VELOCITY = 300
 
-BLOCK_WIDTH = 24
-BLOCK_HEIGHT = 20
 NO_COLS = 20
 NO_ROWS = 10
 
@@ -68,14 +68,11 @@ end
 function createBlocks()
     for i = 2, NO_ROWS - 3, 1 do
         for j = 2, NO_COLS - 3, 1 do
-            block = {
+            brick = Brick:new{
                 x = BLOCK_WIDTH * j,
-                y = BLOCK_HEIGHT * i,
-                width = BLOCK_WIDTH,
-                height = BLOCK_HEIGHT,
-                color = {math.random(), math.random(), math.random()}
+                y = BLOCK_HEIGHT * i
             }
-            table.insert(blocks, block)
+            table.insert(blocks, brick)
         end
     end
 end
@@ -114,15 +111,22 @@ function updateBall(dt)
     for i = #blocks, 1, -1 do
         ret, side =  checkCollision(blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height,ball.x, ball.y, ball.radius * 2, ball.radius * 2)
         if ret then
-            table.remove(blocks, i)
             if side == "bottom" then
                 ball.velocity.y = math.abs(ball.velocity.y)
+                ball.y = blocks[i].y + blocks[i].height
             elseif side == "top" then
                 ball.velocity.y = -1 * math.abs(ball.velocity.y)
+                ball.y = blocks[i].y - (ball.radius * 2)
             elseif side == "right" then
                 ball.velocity.x = math.abs(ball.velocity.x)
+                ball.x = blocks[i].x + blocks[i].width
             else
                 ball.velocity.x = -1 * math.abs(ball.velocity.x)
+                ball.x = blocks[i].x - (ball.radius * 2)
+            end
+            blocks[i]:hit()
+            if blocks[i].isBroken then
+                table.remove(blocks, i)
             end
         end
     end
@@ -173,8 +177,7 @@ function love.draw()
     love.graphics.rectangle("fill", pad.x, pad.y, pad.width, pad.height)
 
     for k,block in pairs(blocks) do
-        love.graphics.setColor(block.color)
-        love.graphics.rectangle("fill", block.x, block.y, block.width, block.height)
+        block:draw()
     end
     love.graphics.setColor(255,255,255)
 
