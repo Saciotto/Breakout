@@ -1,31 +1,10 @@
 
+require "constants"
 require "brick"
 require "ball"
-
-SCREEN_WIDTH  = 480
-SCREEN_HEIGHT = 320
-
-PAD_WIDTH = 60
-PAD_HEIGHT = 10
-PAD_MARGIN = 10
-PAD_VELOCITY = 300
-
-NO_COLS = 20
-NO_ROWS = 10
-
-BALL_MARGIN = 5
-BALL_VELOCITY = 100
-
-pad = {
-    x = (SCREEN_WIDTH - PAD_WIDTH) / 2,
-    y = SCREEN_HEIGHT - PAD_HEIGHT - PAD_MARGIN,
-    width = PAD_WIDTH,
-    height = PAD_HEIGHT,
-    velocity = PAD_VELOCITY
-}
+require "pad"
 
 blocks = {}
-
 gameOver = false
 
 function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
@@ -56,30 +35,14 @@ function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
 end
 
 function createBlocks()
-    for i = 2, NO_ROWS - 3, 1 do
-        for j = 2, NO_COLS - 3, 1 do
+    for i = 2, Constants.NO_ROWS - 3, 1 do
+        for j = 2, Constants.NO_COLS - 3, 1 do
             brick = Brick:new{
-                x = BLOCK_WIDTH * j,
-                y = BLOCK_HEIGHT * i
+                x = Constants.BRICK_WIDTH * j,
+                y = Constants.BRICK_HEIGHT * i
             }
             table.insert(blocks, brick)
         end
-    end
-end
-
-function updatePad(dt)
-    if love.keyboard.isDown('a') or love.keyboard.isDown('left') then
-        pad.x = pad.x - (dt * pad.velocity)
-    end
-    if love.keyboard.isDown('d') or love.keyboard.isDown('right') then
-        pad.x = pad.x + (dt * pad.velocity)
-    end
-
-    if pad.x < 0 then
-        pad.x = 0 
-    end
-    if pad.x > SCREEN_WIDTH - pad.width then
-        pad.x = SCREEN_WIDTH - pad.width
     end
 end
 
@@ -112,8 +75,8 @@ function updateBall(dt)
         ball.x = 0
         ball:hit("left")
     end
-    if ball.x > SCREEN_WIDTH - ball.width then
-        ball.x =  SCREEN_WIDTH - ball.width
+    if ball.x > Constants.SCREEN_WIDTH - ball.width then
+        ball.x =  Constants.SCREEN_WIDTH - ball.width
         ball:hit("right")
     end
 
@@ -121,7 +84,7 @@ function updateBall(dt)
         ball.y = 0
         ball:hit("top")
     end
-    if ball.y > SCREEN_HEIGHT - ball.height then
+    if ball.y > Constants.SCREEN_HEIGHT - ball.height then
         loser = true
         gameOver = true
     end
@@ -136,32 +99,33 @@ function checkObjective()
 end
 
 function love.load()
-    love.window.setMode(SCREEN_WIDTH, SCREEN_HEIGHT, {resizable = false})
+    love.window.setMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, {resizable = false})
     love.window.setTitle("Breakout")
     createBlocks()
 
-    local ballX = (SCREEN_WIDTH - PAD_WIDTH) / 2
-    local ballY = SCREEN_HEIGHT - PAD_HEIGHT - PAD_MARGIN - BALL_MARGIN - BALL_RADIUS * 2
+    local ballX = (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
+    local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
     ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY)
+    
+    pad = Pad:new()
 end
 
 function love.update(dt)
-
     if not gameOver then
-        updatePad(dt)
+        pad:update(dt)
         updateBall(dt)
         checkObjective()
     end
 end
 
 function love.draw()
-    love.graphics.rectangle("fill", pad.x, pad.y, pad.width, pad.height)
+
+    pad:draw()
 
     for k,block in pairs(blocks) do
         block:draw()
     end
     love.graphics.setColor(255,255,255)
-
     ball:draw()
 
     if winner then

@@ -1,7 +1,5 @@
 
-BALL_RADIUS = 5
-BALL_MARGIN = 5
-BALL_VELOCITY = 100
+require "constants"
 
 Ball = {
     x,
@@ -10,8 +8,8 @@ Ball = {
     dy,
     velocity,
     angle,
-    width = BALL_RADIUS * 2,
-    height = BALL_RADIUS * 2
+    width = Constants.BALL_RADIUS * 2,
+    height = Constants.BALL_RADIUS * 2
 }
 
 function Ball:updateDeltaV()
@@ -25,7 +23,7 @@ function Ball:new(o, x, y, velocity, angle)
     self.__index = self
     o.x = x or 0
     o.y = y or 0
-    o.velocity = velocity or BALL_VELOCITY
+    o.velocity = velocity or Constants.BALL_VELOCITY
     o.angle = angle or math.pi/4
     o:updateDeltaV()
     return o

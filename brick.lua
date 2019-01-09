@@ -1,13 +1,11 @@
 
-
-BLOCK_WIDTH = 24
-BLOCK_HEIGHT = 20
+require "constants"
 
 Brick = {
     x = 0,
     y = 0,
-    width = BLOCK_WIDTH,
-    height = BLOCK_HEIGHT,
+    width = Constants.BRICK_WIDTH,
+    height = Constants.BRICK_HEIGHT,
     color = {1,1,1},
     isBroken = false
 }
