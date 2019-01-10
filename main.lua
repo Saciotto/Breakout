@@ -3,6 +3,7 @@ require "constants"
 require "brick"
 require "ball"
 require "pad"
+require "camera"
 
 blocks = {}
 gameOver = false
@@ -99,7 +100,7 @@ function checkObjective()
 end
 
 function love.load()
-    love.window.setMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, {resizable = false})
+    love.window.setMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, {resizable = true})
     love.window.setTitle("Breakout")
     createBlocks()
 
@@ -108,6 +109,8 @@ function love.load()
     ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY)
     
     pad = Pad:new()
+
+    camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
 end
 
 function love.update(dt)
@@ -116,23 +119,30 @@ function love.update(dt)
         updateBall(dt)
         checkObjective()
     end
+    camera:update()
 end
 
 function love.draw()
 
-    pad:draw()
+    love.graphics.setBackgroundColor(0,0,0)
 
+    camera:set()
+
+    love.graphics.setColor(0.5, 0.5, 0.5)
+    love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
+    love.graphics.setColor(1,1,1)
+
+    pad:draw()
     for k,block in pairs(blocks) do
         block:draw()
     end
-    love.graphics.setColor(255,255,255)
+    love.graphics.setColor(1,1,1)
     ball:draw()
-
     if winner then
         love.graphics.print("Vencedor")    
     end
-
     if loser then
         love.graphics.print("Perdedor")
     end
+    camera:unset()
 end
