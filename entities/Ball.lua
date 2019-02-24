@@ -1,5 +1,5 @@
 
-require "constants"
+require "Constants"
 require "entities/Entity"
 
 Ball = Entity:new()

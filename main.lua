@@ -1,12 +1,12 @@
 
-require "constants"
+require "Constants"
 require "entities/Brick"
 require "entities/Ball"
 require "entities/Pad"
 require "Camera"
 
-assetsManager = require "assetsManager"
-renderer = require "renderer"
+AssetsManager = require "AssetsManager"
+Renderer = require "Renderer"
 
 blocks = {}
 gameOver = false
@@ -101,7 +101,7 @@ end
 
 function love.load()
 
-    sprites = assetsManager.loadSprites("assets/breakout.png", "assets/breakoutAtlas.lua")
+    sprites = AssetsManager.loadSprites("assets/breakout.png", "assets/BreakoutAtlas.lua")
 
     love.window.setMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, {resizable = true})
     love.window.setTitle("Breakout")
@@ -128,5 +128,5 @@ function love.update(dt)
 end
 
 function love.draw()
-    renderer.draw()
+    Renderer.draw()
 end

@@ -1,8 +1,8 @@
 
-assetsManager = {}
+AssetsManager = {}
 
 --- Scales and draws a sprite.
-function assetsManager.drawSprite(sprite, x, y, width, height)
+function AssetsManager.drawSprite(sprite, x, y, width, height)
     local sx, sy, sw, sh =  sprite.quad:getViewport()
     love.graphics.draw(sprite.image, sprite.quad, x, y, 0, width/sw, height/sh, 0, 0, 0, 0)
 end
@@ -11,7 +11,7 @@ end
 -- @param filename Tileset image file.
 -- @param datafile Lua file that contains the tileset map, each sprite must contain:
 -- x (horizontal position), y (vertical position) , w (width) and h (height) fields.
-function assetsManager.loadSprites(filename, datafile)
+function AssetsManager.loadSprites(filename, datafile)
     local sprites = {}
     local image = love.graphics.newImage(filename)
     local data = dofile(datafile)
@@ -24,4 +24,4 @@ function assetsManager.loadSprites(filename, datafile)
     return sprites
 end
 
-return assetsManager
+return AssetsManager

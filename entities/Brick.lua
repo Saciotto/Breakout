@@ -1,5 +1,5 @@
 
-require "constants"
+require "Constants"
 require "entities/Entity"
 
 Brick = Entity:new()

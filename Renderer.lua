@@ -1,9 +1,9 @@
 
-renderer = {}
+Renderer = {}
 
 function drawEntity(entity)
     if entity.sprite ~= nil then
-        assetsManager.drawSprite(entity.sprite, entity:getViewport())
+        AssetsManager.drawSprite(entity.sprite, entity:getViewport())
     else
         -- Sprite error, show debug rectangle
         love.graphics.setColor(entity.debugColor or {1,1,1})
@@ -11,7 +11,7 @@ function drawEntity(entity)
     end
 end
 
-function renderer.draw()
+function Renderer.draw()
     love.graphics.setBackgroundColor(0,0,0)
 
     camera:set()
@@ -38,4 +38,4 @@ function renderer.draw()
     camera:unset()
 end
 
-return renderer
+return Renderer

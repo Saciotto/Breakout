@@ -1,5 +1,5 @@
 
-require "constants"
+require "Constants"
 
 Pad = Entity:new()
 
