@@ -6,6 +6,7 @@ require "entities/Pad"
 require "Camera"
 
 assetsManager = require "assetsManager"
+renderer = require "renderer"
 
 blocks = {}
 gameOver = false
@@ -40,10 +41,7 @@ end
 function createBlocks()
     for i = 2, Constants.NO_ROWS - 3, 1 do
         for j = 2, Constants.NO_COLS - 3, 1 do
-            brick = Brick:new{
-                x = Constants.BRICK_WIDTH * j,
-                y = Constants.BRICK_HEIGHT * i
-            }
+            brick = Brick:new(nil, Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, nil, nil, sprites.brickLightGreen)
             table.insert(blocks, brick)
         end
     end
@@ -102,17 +100,18 @@ function checkObjective()
 end
 
 function love.load()
+
+    sprites = assetsManager.loadSprites("assets/breakout.png", "assets/breakoutAtlas.lua")
+
     love.window.setMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, {resizable = true})
     love.window.setTitle("Breakout")
     createBlocks()
-
-    sprites = assetsManager.loadSprites("assets/breakout.png", "assets/breakoutAtlas.lua")
 
     local ballX = (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
     local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
     ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY, sprites.ball)
     
-    pad = Pad:new()
+    pad = Pad:new(nil, nil, nil, nil, nil, sprites.pad)
 
     camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
 
@@ -129,25 +128,5 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setBackgroundColor(0,0,0)
-
-    camera:set()
-
-    love.graphics.setColor(0.5, 0.5, 0.5)
-    love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
-    love.graphics.setColor(1,1,1)
-
-    pad:draw()
-    for k,block in pairs(blocks) do
-        block:draw()
-    end
-    love.graphics.setColor(1,1,1)
-    ball:draw()
-    if winner then
-        love.graphics.print("Vencedor")    
-    end
-    if loser then
-        love.graphics.print("Perdedor")
-    end
-    camera:unset()
+    renderer.draw()
 end

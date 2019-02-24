@@ -1,18 +1,17 @@
 
 require "constants"
 
-Pad = {
-    x = (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2,
-    y = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN,
-    width = Constants.PAD_WIDTH,
-    height = Constants.PAD_HEIGHT,
-    velocity = Constants.PAD_VELOCITY
-}
+Pad = Entity:new()
 
-function Pad:new(o)
-    o = o or {}
+function Pad:new(o, x, y, width, height, sprite, debugColor)
+    x = x or (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
+    y = y or Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN
+    width = width or Constants.PAD_WIDTH
+    height = height or Constants.PAD_HEIGHT
+    local o = Entity:new(o, x, y, width, height, sprite, debugColor)
     setmetatable(o, self)
     self.__index = self
+    o.velocity = Constants.PAD_VELOCITY
     return o
 end
 
@@ -30,8 +29,4 @@ function Pad:update(dt)
     if self.x > Constants.SCREEN_WIDTH - self.width then
         self.x = Constants.SCREEN_WIDTH - self.width
     end
-end
-
-function Pad:draw()
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end

@@ -19,5 +19,9 @@ Constants = {
 
     -- Map
     NO_COLS = 20,
-    NO_ROWS = 10
+    NO_ROWS = 10,
+
+    -- Colors
+    COLOR_RED = {1, 0, 0},
+    COLOR_WHITE = {1, 1, 1}
 }

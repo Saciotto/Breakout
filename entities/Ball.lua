@@ -1,17 +1,8 @@
 
 require "constants"
+require "entities/Entity"
 
-Ball = {
-    x,
-    y,
-    dx,
-    dy,
-    velocity,
-    angle,
-    width = Constants.BALL_RADIUS * 2,
-    height = Constants.BALL_RADIUS * 2,
-    sprite
-}
+Ball = Entity:new()
 
 function Ball:updateDeltaV()
     self.dx = self.velocity * math.cos(self.angle)
@@ -19,14 +10,11 @@ function Ball:updateDeltaV()
 end
 
 function Ball:new(o, x, y, velocity, sprite, angle)
-    o = o or {}
+    local o = Entity:new(o, x, y, Constants.BALL_RADIUS * 2, Constants.BALL_RADIUS * 2, sprite, Constants.COLOR_RED)
     setmetatable(o, self)
     self.__index = self
-    o.x = x or 0
-    o.y = y or 0
     o.velocity = velocity or Constants.BALL_VELOCITY
     o.angle = angle or math.pi/4
-    o.sprite = sprite
     o:updateDeltaV()
     return o
 end
@@ -34,15 +22,6 @@ end
 function Ball:update(dt)
     self.x = self.x + self.dx * dt
     self.y = self.y + self.dy * dt
-end
-
-function Ball:draw()
-    if self.sprite ~= nil then
-        assetsManager.drawSprite(self.sprite, self.x, self.y, self.width, self.height)
-    else 
-        local radius = self.width / 2
-        love.graphics.circle("fill", self.x + radius, self.y + radius, radius)
-    end
 end
 
 function Ball:setVelocity(velocity)

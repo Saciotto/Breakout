@@ -6,80 +6,80 @@ return {
         h = 128 
     },
 
-    BrickBlue = {
+    brickBlue = {
         x = 128,
         y = 0,
         w = 384,
         h = 128
     },
 
-    BrickBrown = {
+    brickBrown = {
         x = 0,
         y = 128,
         w = 384,
         h = 128
     },
 
-    BrickGreen = {
+    brickGreen = {
         x = 384,
         y = 128,
         w = 384,
         h = 128
     },
 
-    BrickGrey = {
+    brickGrey = {
         x = 0,
         y = 256,
         w = 384,
         h = 128
     },
 
-    BrickLightBlue = {
+    brickLightBlue = {
         x = 384,
         y = 256,
         w = 384,
         h = 128
     },
 
-    BrickLightGreen = {
+    brickLightGreen = {
         x = 0,
         y = 384,
         w = 384,
         h = 128
     },
 
-    BrickOrange = {
+    brickOrange = {
         x = 384,
         y = 384,
         w = 384,
         h = 128,
     },
 
-    BrickPurple = {
+    brickPurple = {
         x = 0,
         y = 512,
         w = 384,
         h = 128
     },
 
-    BrickRed = {
+    brickRed = {
         x = 384,
         y = 512,
         w = 384,
         h = 128
     },
 
-    BrickYellow = {
+    brickYellow = {
         x = 0,
         y = 640,
         w = 384,
         h = 128
     },
 
-    Pad = {
+    pad = {
         x = 384,
-        y = 512,
-        w = 384,
+        y = 640,
+        w = 488,
         h = 128
     }
 }
