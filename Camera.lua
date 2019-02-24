@@ -24,7 +24,7 @@ end
 function Camera:update()
     local windowWidth, windowHeight = love.graphics.getDimensions()
 
-    if self.scaleMethod == "FULL_SCEEN" then
+    if self.scaleMethod == "FULL_SCREEN" then
         self.scaleX = windowWidth / self.sceneWidth
         self.scaleY = windowHeight / self.sceneHeight
     elseif self.scaleMethod == "FULL_SCREEN_KEEP_ORIGINAL_ASPECT" then

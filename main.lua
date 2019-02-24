@@ -1,9 +1,11 @@
 
 require "constants"
-require "brick"
-require "ball"
-require "pad"
-require "camera"
+require "entities/Brick"
+require "entities/Ball"
+require "entities/Pad"
+require "Camera"
+
+textureAtlas = require "textureAtlas"
 
 blocks = {}
 gameOver = false
@@ -104,13 +106,17 @@ function love.load()
     love.window.setTitle("Breakout")
     createBlocks()
 
+    assets = textureAtlas.load("assets/breakout.png", "assets/breakoutAtlas.lua")
+
     local ballX = (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
     local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
-    ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY)
+    ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY, assets.quads.ball, assets.image)
     
     pad = Pad:new()
 
     camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
+
+    
 end
 
 function love.update(dt)
@@ -123,7 +129,6 @@ function love.update(dt)
 end
 
 function love.draw()
-
     love.graphics.setBackgroundColor(0,0,0)
 
     camera:set()
