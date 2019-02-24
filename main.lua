@@ -5,7 +5,7 @@ require "entities/Ball"
 require "entities/Pad"
 require "Camera"
 
-textureAtlas = require "textureAtlas"
+assetsManager = require "assetsManager"
 
 blocks = {}
 gameOver = false
@@ -106,11 +106,11 @@ function love.load()
     love.window.setTitle("Breakout")
     createBlocks()
 
-    assets = textureAtlas.load("assets/breakout.png", "assets/breakoutAtlas.lua")
+    sprites = assetsManager.loadSprites("assets/breakout.png", "assets/breakoutAtlas.lua")
 
     local ballX = (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
     local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
-    ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY, assets.quads.ball, assets.image)
+    ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY, sprites.ball)
     
     pad = Pad:new()
 

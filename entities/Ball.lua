@@ -10,8 +10,7 @@ Ball = {
     angle,
     width = Constants.BALL_RADIUS * 2,
     height = Constants.BALL_RADIUS * 2,
-    sprite,
-    image,
+    sprite
 }
 
 function Ball:updateDeltaV()
@@ -19,7 +18,7 @@ function Ball:updateDeltaV()
     self.dy = self.velocity * math.sin(self.angle)
 end
 
-function Ball:new(o, x, y, velocity, sprite, image, angle)
+function Ball:new(o, x, y, velocity, sprite, angle)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
@@ -28,7 +27,6 @@ function Ball:new(o, x, y, velocity, sprite, image, angle)
     o.velocity = velocity or Constants.BALL_VELOCITY
     o.angle = angle or math.pi/4
     o.sprite = sprite
-    o.image = image
     o:updateDeltaV()
     return o
 end
@@ -39,10 +37,12 @@ function Ball:update(dt)
 end
 
 function Ball:draw()
-    local sx, sy, sw, sh = self.sprite:getViewport()
-    love.graphics.draw(self.image, self.sprite, self.x, self.y, self.width/sw, self.height/sh)
-    -- local radius = self.width / 2
-    -- love.graphics.circle("fill", self.x + radius, self.y + radius, radius)
+    if self.sprite ~= nil then
+        assetsManager.drawSprite(self.sprite, self.x, self.y, self.width, self.height)
+    else 
+        local radius = self.width / 2
+        love.graphics.circle("fill", self.x + radius, self.y + radius, radius)
+    end
 end
 
 function Ball:setVelocity(velocity)
