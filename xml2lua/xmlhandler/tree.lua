@@ -4,7 +4,7 @@ local function init()
         options = {noreduce = {}}
     }
     
-    obj._stack = {obj.root, n=1}  
+    obj._stack = {obj.root, _n=1}  
     return obj  
 end
 
@@ -99,7 +99,7 @@ function tree:reduce(node, key, parent)
         node._attr == nil then
         parent[key] = node[1]
     else
-        node.n = nil
+        node._n = nil
     end
 end
 
@@ -119,7 +119,7 @@ function tree:starttag(tag)
     if current[tag.name] then
         table.insert(current[tag.name], node)
     else
-        current[tag.name] = {node; n=1}
+        current[tag.name] = {node; _n=1}
     end
 
     table.insert(self._stack, node)

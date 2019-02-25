@@ -1,4 +1,7 @@
 
+local xml2lua = require("xml2lua")
+local handler = require("xmlhandler.tree")
+
 AssetsManager = {}
 
 --- Scales and draws a sprite.
@@ -14,12 +17,16 @@ end
 function AssetsManager.loadSprites(filename, datafile)
     local sprites = {}
     local image = love.graphics.newImage(filename)
-    local data = dofile(datafile)
-    for name,tile in pairs(data) do
-        sprites[name] = {}
-        sprites[name].quad = love.graphics.newQuad(tile.x, tile.y, tile.w, tile.h, image:getDimensions())
-        sprites[name].image = image
-        sprites[name].name = name
+    local xml = xml2lua.loadFile(datafile)
+    local parser = xml2lua.parser(handler)
+    parser:parse(xml)
+    for i, xmlSprite in pairs(handler.root.TextureAtlas.sprite) do
+        local name = xmlSprite._attr.n:match("(.+)%..+")
+        if (name ~= nil) then
+            sprites[name] = {}
+            sprites[name].quad = love.graphics.newQuad(xmlSprite._attr.x, xmlSprite._attr.y, xmlSprite._attr.w, xmlSprite._attr.h, image:getDimensions())
+            sprites[name].image = image
+        end
     end
     return sprites
 end

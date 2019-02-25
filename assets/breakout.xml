@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:c8de3340d96fa6e4545814ba40992f02:d4ed8716383d66a8a4664a0cc5ceddd9:466756e1bdb35bf8de3b01c92b90ac07$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="breakout.png" width="872" height="768">
+    <sprite n="Ball.png" x="0" y="0" w="128" h="128"/>
+    <sprite n="BrickBlue.png" x="128" y="0" w="384" h="128"/>
+    <sprite n="BrickBrown.png" x="0" y="128" w="384" h="128"/>
+    <sprite n="BrickGreen.png" x="384" y="128" w="384" h="128"/>
+    <sprite n="BrickGrey.png" x="0" y="256" w="384" h="128"/>
+    <sprite n="BrickLightBlue.png" x="384" y="256" w="384" h="128"/>
+    <sprite n="BrickLightGreen.png" x="0" y="384" w="384" h="128"/>
+    <sprite n="BrickOrange.png" x="384" y="384" w="384" h="128"/>
+    <sprite n="BrickPurple.png" x="0" y="512" w="384" h="128"/>
+    <sprite n="BrickRed.png" x="384" y="512" w="384" h="128"/>
+    <sprite n="BrickYellow.png" x="0" y="640" w="384" h="128"/>
+    <sprite n="Pad.png" x="384" y="640" w="488" h="128"/>
+</TextureAtlas>

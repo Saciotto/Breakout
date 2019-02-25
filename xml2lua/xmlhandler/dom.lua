@@ -28,7 +28,7 @@
 --@author Manoel Campos da Silva Filho
 local dom = {
     options = {commentNode=1, piNode=1, dtdNode=1, declNode=1},
-    current = { _children = {n=0}, _type = "ROOT" },
+    current = { _children = {_n=0}, _type = "ROOT" },
     _stack = {}
 }
 
@@ -40,7 +40,7 @@ function dom:starttag(tag)
     local node = { _type = 'ELEMENT', 
                    _name = tag.name, 
                    _attr = tag.attrs, 
-                   _children = {n=0} 
+                   _children = {_n=0} 
                  }
             
     if self.root == nil then

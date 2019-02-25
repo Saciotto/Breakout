@@ -1,4 +1,6 @@
 
+package.path = package.path .. ";xml2lua/?.lua"
+
 require "Constants"
 require "entities/Brick"
 require "entities/Ball"
@@ -41,7 +43,7 @@ end
 function createBlocks()
     for i = 2, Constants.NO_ROWS - 3, 1 do
         for j = 2, Constants.NO_COLS - 3, 1 do
-            brick = Brick:new(nil, Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, nil, nil, sprites.brickLightGreen)
+            brick = Brick:new(nil, Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, nil, nil, sprites.BrickLightGreen)
             table.insert(blocks, brick)
         end
     end
@@ -101,7 +103,7 @@ end
 
 function love.load()
 
-    sprites = AssetsManager.loadSprites("assets/breakout.png", "assets/BreakoutAtlas.lua")
+    sprites = AssetsManager.loadSprites("assets/breakout.png", "assets/breakout.xml")
 
     love.window.setMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, {resizable = true})
     love.window.setTitle("Breakout")
@@ -109,9 +111,9 @@ function love.load()
 
     local ballX = (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
     local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
-    ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY, sprites.ball)
+    ball = Ball:new(nil, ballX, ballY, BALL_VELOCITY, sprites.Ball)
     
-    pad = Pad:new(nil, nil, nil, nil, nil, sprites.pad)
+    pad = Pad:new(nil, nil, nil, nil, nil, sprites.Pad)
 
     camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
 
