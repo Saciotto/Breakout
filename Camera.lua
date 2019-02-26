@@ -1,7 +1,6 @@
+--- Camera class
 
-require "Constants"
-
-Camera = {
+local Camera = {
     sceneWidth,
     sceneHeight,
     scaleMethod,
@@ -12,7 +11,7 @@ Camera = {
 }
 
 function Camera:new(width, height, scaleMethod)
-    o = {}
+    local o = {}
     setmetatable(o, self)
     self.__index = self
     o.sceneWidth = width or Constants.SCREEN_WIDTH
@@ -49,3 +48,5 @@ end
 function Camera:unset()
     love.graphics.pop()
 end
+
+return Camera

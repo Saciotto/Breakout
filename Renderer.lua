@@ -1,7 +1,7 @@
 
-Renderer = {}
+local Renderer = {}
 
-function drawEntity(entity)
+local function drawEntity(entity)
     if entity.sprite ~= nil then
         AssetsManager.drawSprite(entity.sprite, entity:getViewport())
     else

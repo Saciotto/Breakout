@@ -1,12 +1,12 @@
+--- Brick class
 
-require "Constants"
-require "entities/Entity"
+Entity = require("entities.Entity")
 
-Brick = Entity:new()
+local Brick = Entity:new()
 
-function Brick:new(o, x, y, width, height, sprite)
-    local width = width or Constants.BRICK_WIDTH
-    local height = height or Constants.BRICK_HEIGHT
+function Brick:new(x, y, width, height, sprite)
+    width = width or Constants.BRICK_WIDTH
+    height = height or Constants.BRICK_HEIGHT
     local debugColor = {math.random(), math.random(), math.random()}
     local o = Entity:new(o, x, y, width, height, sprite, debugColor)
     setmetatable(o, self)
@@ -18,3 +18,5 @@ end
 function Brick:hit()
     self.isBroken = true
 end
+
+return Brick

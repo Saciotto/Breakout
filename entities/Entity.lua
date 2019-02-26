@@ -1,7 +1,6 @@
+--- Entity class
 
-require "Constants"
-
-Entity = {}
+local Entity = {}
 
 function Entity:new(o, x, y, width, height, sprite, debugColor)
     local o = o or {}
@@ -19,3 +18,5 @@ end
 function Entity:getViewport()
     return self.x, self.y, self.width, self.height
 end
+
+return Entity

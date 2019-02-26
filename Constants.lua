@@ -1,5 +1,5 @@
 
-Constants = {
+return {
     -- Screen dimensions
     SCREEN_WIDTH  = 480,
     SCREEN_HEIGHT = 320,

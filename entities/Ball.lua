@@ -1,21 +1,22 @@
+--- Ball class
 
-require "Constants"
-require "entities/Entity"
+local Entity = require("entities.Entity")
 
-Ball = Entity:new()
+local Ball = Entity:new()
 
-function Ball:updateDeltaV()
-    self.dx = self.velocity * math.cos(self.angle)
-    self.dy = self.velocity * math.sin(self.angle)
+local function updateDeltaV(ball)
+    ball.dx = ball.velocity * math.cos(ball.angle)
+    ball.dy = ball.velocity * math.sin(ball.angle)
 end
 
-function Ball:new(o, x, y, velocity, sprite, angle)
-    local o = Entity:new(o, x, y, Constants.BALL_RADIUS * 2, Constants.BALL_RADIUS * 2, sprite, Constants.COLOR_RED)
+function Ball:new(x, y, velocity, sprite, angle)
+    local side =  Constants.BALL_RADIUS * 2
+    local o = Entity:new(nil, x, y, side, side, sprite, Constants.COLOR_RED)
     setmetatable(o, self)
     self.__index = self
     o.velocity = velocity or Constants.BALL_VELOCITY
     o.angle = angle or math.pi/4
-    o:updateDeltaV()
+    updateDeltaV(o)
     return o
 end
 
@@ -26,12 +27,12 @@ end
 
 function Ball:setVelocity(velocity)
     self.velocity = velocity
-    self:updateDeltaV()
+    updateDeltaV(self)
 end
 
 function Ball:setAngle(angle)
     self.angle = angle
-    self:updateDeltaV()
+    updateDeltaV(self)
 end
 
 function Ball:hit(side)
@@ -48,5 +49,7 @@ end
 
 function Ball:hitPad(cos)
     self.angle = math.pi + math.acos(-1 * cos) 
-    self:updateDeltaV()
+    updateDeltaV(self)
 end
+
+return Ball
