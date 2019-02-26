@@ -1,6 +1,6 @@
 --- Ball class
 
-local Entity = require("entities.Entity")
+local Entity = require("Entity")
 
 local Ball = Entity:new()
 

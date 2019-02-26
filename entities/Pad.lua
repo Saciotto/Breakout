@@ -1,6 +1,6 @@
 --- Pad class
 
-local Entity = require("entities.Entity")
+local Entity = require("Entity")
 
 local Pad = Entity:new()
 

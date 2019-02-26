@@ -1,6 +1,6 @@
 --- Brick class
 
-Entity = require("entities.Entity")
+local Entity = require("Entity")
 
 local Brick = Entity:new()
 

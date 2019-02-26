@@ -1,4 +1,4 @@
---- Entity class
+--- Entity super class
 
 local Entity = {}
 
