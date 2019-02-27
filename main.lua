@@ -1,10 +1,9 @@
+--- Love2d entry point
 
+-- Adds xml2lua to Lua path
 package.path = package.path .. ";xml2lua/?.lua"
 
 Constants = require("Constants")
-Brick = require("entities.Brick")
-Ball = require("entities.Ball")
-Pad = require("entities.Pad")
 Camera = require("Camera")
 AssetsManager = require("AssetsManager")
 Renderer = require("Renderer")

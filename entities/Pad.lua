@@ -1,5 +1,6 @@
 --- Pad class
 
+local Constants = require("Constants")
 local Entity = require("Entity")
 
 local Pad = Entity:new()

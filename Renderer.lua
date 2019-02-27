@@ -11,31 +11,27 @@ local function drawEntity(entity)
     end
 end
 
-function Renderer.draw()
+function Renderer.draw(screen)
     love.graphics.setBackgroundColor(0,0,0)
 
-    camera:set()
-
+    screen.camera:set()
     love.graphics.setColor(0.5, 0.5, 0.5)
     love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
     love.graphics.setColor(1,1,1)
 
-    drawEntity(pad)
-    -- pad:draw()
-    for k,block in pairs(blocks) do
-        drawEntity(block)
-        --block:draw()
+    drawEntity(screen.pad)
+    for k,brick in pairs(screen.bricks) do
+        drawEntity(brick)
     end
     love.graphics.setColor(1,1,1)
-    drawEntity(ball)
-    -- ball:draw()
-    if winner then
+    drawEntity(screen.ball)
+    if screen.controller.winner then
         love.graphics.print("Vencedor")    
     end
-    if loser then
+    if screen.controller.loser then
         love.graphics.print("Perdedor")
     end
-    camera:unset()
+    screen.camera:unset()
 end
 
 return Renderer

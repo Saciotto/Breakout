@@ -1,14 +1,15 @@
 
-local Controller = {}
-
-gameOver = false
+local Controller = {
+    gameOver = false,
+    winner = false,
+    loser = false
+}
 
 local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
     w = 0.5 * (w1 + w2)
     h = 0.5 * (h1 + h2)
     dx = (x1 + w1 / 2) - (x2 + w2 / 2)
     dy = (y1 + h1 / 2) - (y2 + h2 / 2)
-
     if math.abs(dx) <= w and math.abs(dy) <= h then
         wy = w * dy
         hx = h * dx
@@ -30,65 +31,72 @@ local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
     return false
 end
 
-function updateBall(dt)
+local function updateBall(self, screen, dt)
 
-    ball:update(dt)
+    screen.ball:update(dt)
+    local bx, by, bw, bh = screen.ball:getViewport()
+    local px, py, pw, ph = screen.pad:getViewport()
 
-    if checkCollision(ball.x, ball.y, ball.width, ball.height, 
-                      pad.x, pad.y, pad.width, pad.height) then
-        ball.y = pad.y - ball.height
-        local cos = ((ball.x + ball.width / 2) - pad.x) / pad.width
+    if checkCollision(bx, by, bw, bh, px, py, pw, ph) then
+        screen.ball.y = screen.pad.y - screen.ball.height
+        local cos = ((screen.ball.x + screen.ball.width / 2) - screen.pad.x) / screen.pad.width
         if (cos < 0) then cos = 0 end
         if (cos > 1) then cos = 1 end
         cos = cos - 0.5
-        ball:hitPad(cos)
+        screen.ball:hitPad(cos)
     end
 
-    for i = #blocks, 1, -1 do
-        ret, side =  checkCollision(ball.x, ball.y, ball.width, ball.height, blocks[i].x, blocks[i].y, blocks[i].width, blocks[i].height)
+    for i = #screen.bricks, 1, -1 do
+        local brx, bry, brw, brh = screen.bricks[i]:getViewport()
+        local ret, side = checkCollision(bx, by, bw, bh, brx, bry, brw, brh)
         if ret then
-            ball:hit(side)
-            blocks[i]:hit()
-            if blocks[i].isBroken then
-                table.remove(blocks, i)
+            screen.ball:hit(side)
+            screen.bricks[i]:hit()
+            if screen.bricks[i].isBroken then
+                table.remove(screen.bricks, i)
             end
         end
     end
-
-    if ball.x < 0 then
-        ball.x = 0
-        ball:hit("left")
+    if screen.ball.x < 0 then
+        screen.ball.x = 0
+        screen.ball:hit("left")
     end
-    if ball.x > Constants.SCREEN_WIDTH - ball.width then
-        ball.x =  Constants.SCREEN_WIDTH - ball.width
-        ball:hit("right")
+    if screen.ball.x > Constants.SCREEN_WIDTH - screen.ball.width then
+        screen.ball.x =  Constants.SCREEN_WIDTH - screen.ball.width
+        screen.ball:hit("right")
     end
-
-    if ball.y < 0 then
-        ball.y = 0
-        ball:hit("top")
+    if screen.ball.y < 0 then
+        screen.ball.y = 0
+        screen.ball:hit("top")
     end
-    if ball.y > Constants.SCREEN_HEIGHT - ball.height then
-        loser = true
-        gameOver = true
-    end
-
-end
-
-function checkObjective()
-    if #blocks == 0 then
-        winner = true
-        gameOver = true
+    if screen.ball.y > Constants.SCREEN_HEIGHT - screen.ball.height then
+        self.loser = true
+        self.gameOver = true
     end
 end
 
-function Controller.update(dt)
-    if not gameOver then
-        pad:update(dt)
-        updateBall(dt)
-        checkObjective()
+local function checkObjective(self)
+    if #self.screen.bricks == 0 then
+        self.winner = true
+        self.gameOver = true
     end
-    camera:update()
+end
+
+function Controller:new(screen)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+    o.screen = screen
+    return o
+end
+
+function Controller:update(dt)
+    if not self.gameOver then
+        self.screen.pad:update(dt)
+        updateBall(self, self.screen, dt)
+        checkObjective(self)
+    end
+    self.screen.camera:update()
 end
 
 return Controller
