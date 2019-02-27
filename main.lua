@@ -6,10 +6,8 @@ package.path = package.path .. ";xml2lua/?.lua"
 Constants = require("Constants")
 Camera = require("Camera")
 AssetsManager = require("AssetsManager")
-Renderer = require("Renderer")
-Controller = require("Controller")
 
-GameScreen = require("screens.GameScreen")
+SplashScreen = require("screens.SplashScreen")
 
 function SetScreen(NewScreen)
     screen = NewScreen:new()
@@ -24,7 +22,7 @@ function love.load()
     sprites = AssetsManager.loadSprites("assets/breakout.png", "assets/breakout.xml")
 
     -- Set first screen
-    SetScreen(GameScreen)
+    SetScreen(SplashScreen)
 end
 
 function love.update(dt)
@@ -33,4 +31,8 @@ end
 
 function love.draw()
     screen:draw()
+end
+
+function love.keypressed(key, unicode)
+    screen:keypressed(key, unicode)
 end

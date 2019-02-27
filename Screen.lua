@@ -15,4 +15,7 @@ end
 function Screen:render()
 end
 
+function Screen:keypressed(key, unicode)
+end
+
 return Screen

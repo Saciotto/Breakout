@@ -1,5 +1,7 @@
 --- GameScreen class
 
+local Controller = require("Controller")
+local Renderer = require("Renderer")
 local Screen = require("Screen")
 local Brick = require("entities.Brick")
 local Ball = require("entities.Ball")
