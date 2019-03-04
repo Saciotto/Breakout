@@ -1,15 +1,7 @@
 
-local Renderer = {}
+local Constants = require("Constants")
 
-local function drawEntity(entity)
-    if entity.sprite ~= nil then
-        AssetsManager.drawSprite(entity.sprite, entity:getViewport())
-    else
-        -- Sprite error, show debug rectangle
-        love.graphics.setColor(entity.debugColor or {1,1,1})
-        love.graphics.rectangle("fill", entity:getViewport())
-    end
-end
+local Renderer = {}
 
 function Renderer.draw(screen)
     love.graphics.setBackgroundColor(0,0,0)
@@ -19,12 +11,12 @@ function Renderer.draw(screen)
     love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
     love.graphics.setColor(1,1,1)
 
-    drawEntity(screen.pad)
+    screen.pad:draw()
     for k,brick in pairs(screen.bricks) do
-        drawEntity(brick)
+        brick:draw()
     end
     love.graphics.setColor(1,1,1)
-    drawEntity(screen.ball)
+    screen.ball:draw()
     if screen.controller.winner then
         love.graphics.print("Vencedor")    
     end

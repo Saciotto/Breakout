@@ -1,4 +1,6 @@
 
+local Constants = require("Constants")
+
 local Controller = {
     gameOver = false,
     winner = false,

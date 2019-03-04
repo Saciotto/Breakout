@@ -3,9 +3,9 @@
 -- Adds xml2lua to Lua path
 package.path = package.path .. ";xml2lua/?.lua"
 
-Constants = require("Constants")
+local Constants = require("Constants")
 Camera = require("Camera")
-AssetsManager = require("AssetsManager")
+local AssetsManager = require("AssetsManager")
 
 SplashScreen = require("screens.SplashScreen")
 
@@ -19,7 +19,7 @@ function love.load()
     love.window.setTitle("Breakout")
 
     -- Load assets
-    sprites = AssetsManager.loadSprites("assets/breakout.png", "assets/breakout.xml")
+    Sprites = AssetsManager.loadSprites("assets/uipackSpace_sheet.xml")
 
     -- Set first screen
     SetScreen(SplashScreen)
