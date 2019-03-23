@@ -28,10 +28,10 @@ function AssetsManager.loadSprites(atlas)
     parser:parse(xml)
     local imagePath = atlas:match(".+/") .. handler.root.TextureAtlas._attr.imagePath
     local image = love.graphics.newImage(imagePath)
-    for i, xmlSprite in pairs(handler.root.TextureAtlas.SubTexture) do
-        local name = xmlSprite._attr.name:match("(.+)%..+")
+    for i, xmlSprite in pairs(handler.root.TextureAtlas.sprite) do
+        local name = xmlSprite._attr.n and xmlSprite._attr.n:match("(.+)%..+")
         if (name ~= nil) then
-            sprites[name] = AssetsManager.newSprite(xmlSprite._attr.x, xmlSprite._attr.y, xmlSprite._attr.width, xmlSprite._attr.height, image)
+            sprites[name] = AssetsManager.newSprite(xmlSprite._attr.x, xmlSprite._attr.y, xmlSprite._attr.w, xmlSprite._attr.h, image)
         end
     end
     return sprites

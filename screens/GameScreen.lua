@@ -15,7 +15,7 @@ local function createBlocks(self)
     local lenght = 3
     for i = 2, Constants.NO_ROWS, 1 do
         for j = 1, Constants.NO_COLS , 1 do
-            local brick = Brick:new(Constants.BRICK_WIDTH * j * lenght, Constants.BRICK_HEIGHT * i, "green", lenght)
+            local brick = Brick:new(Constants.BRICK_WIDTH * j * lenght, Constants.BRICK_HEIGHT * i, "blue", lenght)
             table.insert(self.bricks, brick)
         end
     end

@@ -1,28 +1,25 @@
 
 local Constants = {
     -- Screen dimensions
-    SCREEN_WIDTH  = 480,
-    SCREEN_HEIGHT = 320,
+    SCREEN_WIDTH  = 1280,
+    SCREEN_HEIGHT = 720,
 
     -- Gameplay
-    PAD_MARGIN = 10,
-    PAD_VELOCITY = 300,
-    BALL_MARGIN = 5,
-    BALL_VELOCITY = 100,
+    PAD_MARGIN = 20,
+    PAD_VELOCITY = 900,
+    BALL_MARGIN = 15,
+    BALL_VELOCITY = 300,
 
     -- Entities
-    PAD_WIDTH = 60,
-    PAD_HEIGHT = 10,
-    BRICK_LEFT_WIDTH = 6,
-    BRICK_RIGHT_WIDTH = 6,
-    BRICK_WIDTH = 16,
-    BRICK_HEIGHT = 20,
-    BALL_RADIUS = 5,
-    BALL_MARGIN = 5,
-    BALL_VELOCITY = 100,
+    PAD_WIDTH = 96,
+    PAD_HEIGHT = 16,
+    BRICK_WIDTH = 32,
+    BRICK_HEIGHT = 32,
+    BALL_RADIUS = 8,
+    BALL_MARGIN = 8,
 
     -- Map
-    NO_COLS = 8,
+    NO_COLS = 11,
     NO_ROWS = 7,
 
     -- Colors

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="breakout.png" width="256" height="64">
+    <sprite n="brick_blue.png" x="0" y="0" w="64" h="64"/>
+    <sprite n="brick_blue_left.png" x="64" y="0" w="64" h="64"/>
+    <sprite n="brick_blue_mid.png" x="128" y="0" w="64" h="64"/>
+    <sprite n="brick_blue_right.png" x="192" y="0" w="64" h="64"/>
+</TextureAtlas>
