@@ -17,6 +17,7 @@ function Ball:new(x, y, velocity, sprite, angle)
     self.__index = self
     o.velocity = velocity or Constants.BALL_VELOCITY
     o.angle = angle or math.pi/4
+    o.sprite = Sprites["ball"]
     updateDeltaV(o)
     return o
 end
@@ -51,6 +52,10 @@ end
 function Ball:hitPad(cos)
     self.angle = math.pi + math.acos(-1 * cos) 
     updateDeltaV(self)
+end
+
+function Ball:draw()
+    self.drawItem(self.sprite, self.debugColor, self.x, self.y, self.width, self.height)
 end
 
 return Ball
