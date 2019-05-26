@@ -10,14 +10,13 @@ local function updateDeltaV(ball)
     ball.dy = ball.velocity * math.sin(ball.angle)
 end
 
-function Ball:new(x, y, velocity, sprite, angle)
+function Ball:new(x, y, velocity, angle)
     local side =  Constants.BALL_RADIUS * 2
-    local o = Entity:new(nil, x, y, side, side, sprite, Constants.COLOR_RED)
+    local o = Entity:new(nil, x, y, side, side, Sprites["ball"], Constants.COLOR_RED)
     setmetatable(o, self)
     self.__index = self
     o.velocity = velocity or Constants.BALL_VELOCITY
     o.angle = angle or math.pi/4
-    o.sprite = Sprites["ball"]
     updateDeltaV(o)
     return o
 end

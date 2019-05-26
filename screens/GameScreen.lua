@@ -32,12 +32,12 @@ end
 function GameScreen:load()
     self.controller = Controller:new(self)
 
-    local ballX = (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
+    local ballX = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
     local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
 
     createBlocks(self)
-    self.ball = Ball:new(ballX, ballY, BALL_VELOCITY, Sprites.dotBlue)
-    self.pad = Pad:new(nil, nil, nil, nil, Sprites.Pad)
+    self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
+    self.pad = Pad:new()
     self.camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
 end
 
