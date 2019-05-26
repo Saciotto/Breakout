@@ -11,8 +11,9 @@ local Constants = {
     BALL_VELOCITY = 300,
 
     -- Entities
-    PAD_WIDTH = 96,
+    PAD_WIDTH = 32,
     PAD_HEIGHT = 16,
+    PAD_LENGTH = 3,
     BRICK_WIDTH = 32,
     BRICK_HEIGHT = 32,
     BALL_RADIUS = 8,

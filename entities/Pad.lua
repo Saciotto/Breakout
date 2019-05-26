@@ -5,16 +5,23 @@ local Entity = require("Entity")
 
 local Pad = Entity:new()
 
-function Pad:new(x, y, width, height, sprite, debugColor)
-    x = x or (Constants.SCREEN_WIDTH - Constants.PAD_WIDTH) / 2
+function Pad:new(x, y, debugColor)
+    x = x or (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
     y = y or Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN
-    width = width or Constants.PAD_WIDTH
-    height = height or Constants.PAD_HEIGHT
-    local o = Entity:new(nil, x, y, width, height, sprite, debugColor)
+    local o = Entity:new(nil, x, y, Constants.PAD_WIDTH * Constants.PAD_LENGTH, Constants.PAD_HEIGHT, nil, debugColor)
     setmetatable(o, self)
     self.__index = self
+    o.sleft = Sprites["pad_left"]
+    o.smid = Sprites["pad_mid"]
+    o.sright = Sprites["pad_right"]
+    o.len = Constants.PAD_LENGTH
     o.velocity = Constants.PAD_VELOCITY
     return o
+end
+
+function Pad:setLenght(length)
+    self.width = Constants.PAD_WIDTH * lenght
+    self.len = length
 end
 
 function Pad:update(dt)
@@ -30,6 +37,21 @@ function Pad:update(dt)
     if self.x > Constants.SCREEN_WIDTH - self.width then
         self.x = Constants.SCREEN_WIDTH - self.width
     end
+end
+
+function Pad:draw()
+    -- Error
+    if self.len < 2 then
+        return
+    end
+    -- Draw
+    self.drawItem(self.sleft, self.debugColor, self.x, self.y, Constants.PAD_WIDTH, self.height)
+    local pos = self.x + Constants.PAD_WIDTH
+    for i = 2, self.len - 1, 1 do
+        self.drawItem(self.smid, self.debugColor, pos, self.y, Constants.PAD_WIDTH, self.height)
+        pos = pos + Constants.PAD_WIDTH
+    end
+    self.drawItem(self.sright, self.debugColor, pos, self.y, Constants.PAD_WIDTH, self.height)
 end
 
 return Pad
