@@ -38,6 +38,7 @@ function GameScreen:load()
     createBlocks(self)
     self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
     self.pad = Pad:new()
+    self.background = love.graphics.newImage("assets/images/background.png")
     self.camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
 end
 

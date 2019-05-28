@@ -7,8 +7,13 @@ function Renderer.draw(screen)
     love.graphics.setBackgroundColor(0,0,0)
 
     screen.camera:set()
-    love.graphics.setColor(0.5, 0.5, 0.5)
-    love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
+
+    if (screen.background ~= nil) then
+        love.graphics.draw(screen.background)
+    else
+        love.graphics.setColor(0.5, 0.5, 0.5)
+        love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
+    end
     love.graphics.setColor(1,1,1)
 
     screen.pad:draw()
