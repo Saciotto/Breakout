@@ -18,4 +18,7 @@ end
 function Screen:keypressed(key, unicode)
 end
 
+function Screen:mousemoved(x, y, dx, dy, istouch)
+end
+
 return Screen

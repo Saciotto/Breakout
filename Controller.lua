@@ -84,6 +84,11 @@ local function checkObjective(self)
     end
 end
 
+function Controller:mousemoved(x, y, dx, dy, istouch)
+    local newX, newY = self.screen.camera:transform(x, y)
+    self.screen.pad.x = newX
+end
+
 function Controller:new(screen)
     local o = {}
     setmetatable(o, self)

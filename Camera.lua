@@ -39,6 +39,12 @@ function Camera:update()
     self.offsetY = (windowHeight - (self.sceneHeight * self.scaleY)) / 2
 end
 
+function Camera:transform(x, y)
+    newX = (x - self.offsetX) * self.scaleX
+    newY = (x - self.offsetY) * self.scaleY
+    return newX, newY
+end
+
 function Camera:set()
     love.graphics.push()
     love.graphics.translate(self.offsetX, self.offsetY)

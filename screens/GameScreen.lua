@@ -2,6 +2,7 @@
 
 local Constants = require("Constants")
 local Controller = require("Controller")
+local Camera = require("Camera")
 local Renderer = require("Renderer")
 local Screen = require("Screen")
 local Brick = require("entities.Brick")
@@ -44,6 +45,10 @@ end
 
 function GameScreen:update(dt)
     self.controller:update(dt)
+end
+
+function GameScreen:mousemoved(x, y, dx, dy, istouch)
+    self.controller:mousemoved(x, y, dx, dy, istouch)
 end
 
 function GameScreen:draw()

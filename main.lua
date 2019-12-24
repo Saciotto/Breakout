@@ -4,10 +4,9 @@
 package.path = package.path .. ";xml2lua/?.lua"
 
 local Constants = require("Constants")
-Camera = require("Camera")
+local Camera = require("Camera")
 local AssetsManager = require("AssetsManager")
-
-SplashScreen = require("screens.SplashScreen")
+local SplashScreen = require("screens.SplashScreen")
 
 function SetScreen(NewScreen)
     screen = NewScreen:new()
@@ -35,4 +34,8 @@ end
 
 function love.keypressed(key, unicode)
     screen:keypressed(key, unicode)
+end
+
+function love.mousemoved(x, y, dx, dy, istouch)
+    screen:mousemoved(x, y, dx, dy, istouch)
 end
