@@ -32,6 +32,8 @@ function Entity.drawItem(sprite, debugColor, x, y, w, h)
         -- Sprite error, show debug rectangle
         love.graphics.setColor(debugColor or {1,1,1})
         love.graphics.rectangle("fill", x, y, w, h)
+        -- reset graphic color
+        love.graphics.setColor(1,1,1)
     end
 end
 

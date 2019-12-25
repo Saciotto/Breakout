@@ -20,7 +20,6 @@ function Renderer.draw(screen)
     for k,brick in pairs(screen.bricks) do
         brick:draw()
     end
-    love.graphics.setColor(1,1,1)
     screen.ball:draw()
     if screen.controller.winner then
         love.graphics.print("Vencedor")    
