@@ -1,8 +1,8 @@
 
 local Constants = {
     -- Screen dimensions
-    SCREEN_WIDTH  = 1280,
-    SCREEN_HEIGHT = 720,
+    SCREEN_WIDTH  = 1248,
+    SCREEN_HEIGHT = 704,
 
     -- Gameplay
     PAD_MARGIN = 20,
