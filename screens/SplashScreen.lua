@@ -18,7 +18,7 @@ end
 function SplashScreen:draw()
     love.graphics.setBackgroundColor(0,0,0)
     love.graphics.setColor(1,1,1)
-    love.graphics.print("Splash Screen")
+    love.graphics.print("Splash Screen (" .. _VERSION .. ")")
 end
 
 return SplashScreen
