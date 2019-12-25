@@ -91,6 +91,14 @@ function GameScreen:mousemoved(x, y, dx, dy, istouch)
     self.controller:mousemoved(x, y, dx, dy, istouch)
 end
 
+function GameScreen:mousepressed(x, y, button)
+    self.controller:mousepressed(x, y, button)
+end
+
+function GameScreen:keypressed(key, unicode)
+    self.controller:keypressed(key, unicode)
+end
+
 function GameScreen:draw()
     Renderer.draw(self)
 end

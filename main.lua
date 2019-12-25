@@ -39,3 +39,7 @@ end
 function love.mousemoved(x, y, dx, dy, istouch)
     screen:mousemoved(x, y, dx, dy, istouch)
 end
+
+function love.mousepressed(x, y, button)
+    screen:mousepressed(x, y, button)
+end

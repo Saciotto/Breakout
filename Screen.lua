@@ -21,4 +21,7 @@ end
 function Screen:mousemoved(x, y, dx, dy, istouch)
 end
 
+function Screen.mousepressed(x, y, button)
+end
+
 return Screen

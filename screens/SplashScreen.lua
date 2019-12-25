@@ -15,6 +15,10 @@ function SplashScreen:keypressed(key, unicode)
     SetScreen(GameScreen)
 end
 
+function SplashScreen.mousepressed(x, y, button)
+    SetScreen(GameScreen)
+end
+
 function SplashScreen:draw()
     love.graphics.setBackgroundColor(0,0,0)
     love.graphics.setColor(1,1,1)

@@ -4,7 +4,8 @@ local Constants = require("Constants")
 local Controller = {
     gameOver = false,
     winner = false,
-    loser = false
+    loser = false,
+    paused = true
 }
 
 local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
@@ -34,7 +35,6 @@ local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
 end
 
 local function updateBall(self, screen, dt)
-
     screen.ball:update(dt)
     local bx, by, bw, bh = screen.ball:getViewport()
     local px, py, pw, ph = screen.pad:getViewport()
@@ -86,7 +86,7 @@ end
 
 function Controller:mousemoved(x, y, dx, dy, istouch)
     local newX, newY = self.screen.camera:transform(x, y)
-    self.screen.pad.x = newX
+    self.screen.pad.x = newX - (self.screen.pad:getWidth() / 2)
 end
 
 function Controller:new(screen)
@@ -97,11 +97,21 @@ function Controller:new(screen)
     return o
 end
 
+function Controller:keypressed(key, unicode)
+    self.paused = false
+end
+
+function Controller:mousepressed(x, y, button)
+    self.paused = false
+end
+
 function Controller:update(dt)
-    if not self.gameOver then
+    if not self.gameOver and not self.paused then
         self.screen.pad:update(dt)
         updateBall(self, self.screen, dt)
         checkObjective(self)
+    else
+        self.screen.pad:update(dt)
     end
     self.screen.camera:update()
 end

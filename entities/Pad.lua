@@ -19,6 +19,10 @@ function Pad:new(x, y, debugColor)
     return o
 end
 
+function Pad:getWidth(length)
+    return self.width
+end
+
 function Pad:setLenght(length)
     self.width = Constants.PAD_WIDTH * lenght
     self.len = length

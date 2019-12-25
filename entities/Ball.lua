@@ -16,7 +16,7 @@ function Ball:new(x, y, velocity, angle)
     setmetatable(o, self)
     self.__index = self
     o.velocity = velocity or Constants.BALL_VELOCITY
-    o.angle = angle or math.pi/4
+    o.angle = angle or -math.pi/4
     updateDeltaV(o)
     return o
 end
