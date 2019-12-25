@@ -13,7 +13,7 @@ end
 
 --- Scales and draws a sprite.
 function AssetsManager.drawSprite(sprite, x, y, width, height)
-    local sx, sy, sw, sh =  sprite.quad:getViewport()
+    local sx, sy, sw, sh = sprite.quad:getViewport()
     width = width or sw
     height =  height or sh
     love.graphics.draw(sprite.image, sprite.quad, x, y, 0, width/sw, height/sh)
