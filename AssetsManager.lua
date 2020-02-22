@@ -1,6 +1,6 @@
 
-local xml2lua = require("xml2lua")
-local handler = require("xmlhandler.tree")
+local xml2lua = require("xml2lua.xml2lua")
+local handler = require("xml2lua.xmlhandler.tree")
 
 AssetsManager = {}
 

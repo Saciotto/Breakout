@@ -1,8 +1,5 @@
 --- Love2d entry point
 
--- Adds xml2lua to Lua path
-package.path = package.path .. ";xml2lua/?.lua"
-
 local Constants = require("Constants")
 local Camera = require("Camera")
 local AssetsManager = require("AssetsManager")
