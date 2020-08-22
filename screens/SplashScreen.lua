@@ -1,6 +1,7 @@
 
 local Screen = require("Screen")
-local GameScreen = require("screens.GameScreen")
+local Renderer = require("Renderer")
+local StageSelect = require("screens.StageSelect")
 
 local SplashScreen = Screen:new()
 
@@ -12,16 +13,15 @@ function SplashScreen:new()
 end
 
 function SplashScreen:keypressed(key, unicode)
-    SetScreen(GameScreen)
+    SetScreen(StageSelect)
 end
 
 function SplashScreen.mousepressed(x, y, button)
-    SetScreen(GameScreen)
+    SetScreen(StageSelect)
 end
 
 function SplashScreen:draw()
-    love.graphics.setBackgroundColor(0,0,0)
-    love.graphics.setColor(1,1,1)
+    Renderer.draw(self)
     love.graphics.print("Splash Screen (" .. _VERSION .. ")")
 end
 

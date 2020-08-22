@@ -1,7 +1,6 @@
 --- Brick class
 
 local Constants = require("Constants")
-local AssetsManager = require("AssetsManager")
 local Entity = require("Entity")
 
 local Brick = Entity:new()
@@ -17,13 +16,16 @@ function Brick:new(x, y, color, len)
     o.sright = Sprites["brick_" .. color .. "_right"]
     o.ssquare = Sprites["brick_" .. color]
     o.len = len or 1
+    o.indestrutible = false
     o.isBroken = false
     o.width = o.len * Constants.BRICK_WIDTH
     return o
 end
 
 function Brick:hit()
-    self.isBroken = true
+    if not self.indestrutible then
+        self.isBroken = true
+    end
 end
 
 function Brick:draw()

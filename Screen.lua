@@ -1,11 +1,17 @@
 --- Screen super class
 
+local Camera = require("Camera")
+local Constants = require("Constants")
+
 local Screen = {}
 
 function Screen:new()
     local o = {}
     setmetatable(o, self)
     self.__index = self
+    o.background = love.graphics.newImage("assets/images/GreenCardboard.png")
+    o.camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
+    o.entities = {}
     return o
 end
 

@@ -6,6 +6,7 @@ local Camera = require("Camera")
 local Renderer = require("Renderer")
 local Screen = require("Screen")
 local Brick = require("entities.Brick")
+local BricksGrid = require("entities.BricksGrid")
 local Ball = require("entities.Ball")
 local Pad = require("entities.Pad")
 
@@ -44,7 +45,7 @@ local function readMap(self)
                 if c ~= line:sub(j,j) then
                     j2 = j - 1
                     local brick = createBlock(c, i, j1, j2 - j1)
-                    table.insert(self.bricks, brick)
+                    self.grid:addBrick(brick)
                     c = '.'
                 end
             end
@@ -58,7 +59,7 @@ local function readMap(self)
 end
 
 local function createBlocks(self)
-    self.bricks = {}
+    self.grid = BricksGrid:new()
     readMap(self)
 end
 
@@ -79,8 +80,12 @@ function GameScreen:load()
     createBlocks(self)
     self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
     self.pad = Pad:new()
-    self.background = love.graphics.newImage("assets/images/background.png")
-    self.camera = Camera:new(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
+    self.background = love.graphics.newImage("assets/images/SunnyDay.png")
+    self.entities = {
+        self.pad,
+        self.ball,
+        self.grid
+    }
 end
 
 function GameScreen:update(dt)

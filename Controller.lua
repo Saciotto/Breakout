@@ -34,31 +34,48 @@ local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
     return false
 end
 
-local function updateBall(self, screen, dt)
-    screen.ball:update(dt)
+local function checkCollisionWithPad(screen)
     local bx, by, bw, bh = screen.ball:getViewport()
     local px, py, pw, ph = screen.pad:getViewport()
 
-    if checkCollision(bx, by, bw, bh, px, py, pw, ph) then
-        screen.ball.y = screen.pad.y - screen.ball.height
-        local cos = ((screen.ball.x + screen.ball.width / 2) - screen.pad.x) / screen.pad.width
-        if (cos < 0) then cos = 0 end
-        if (cos > 1) then cos = 1 end
-        cos = cos - 0.5
-        screen.ball:hitPad(cos)
+    local ret, side = checkCollision(bx, by, bw, bh, px, py, pw, ph)
+    if ret then
+        if side == "bottom" then
+            screen.ball.y = screen.pad.y - screen.ball.height
+            local cos = ((screen.ball.x + screen.ball.width / 2) - screen.pad.x) / screen.pad.width
+            if (cos < 0) then cos = 0 end
+            if (cos > 1) then cos = 1 end
+            cos = cos - 0.5
+            screen.ball:hitPad(cos)
+        else
+            screen.ball:hit(side)
+        end
     end
+end
 
-    for i = #screen.bricks, 1, -1 do
-        local brx, bry, brw, brh = screen.bricks[i]:getViewport()
+local function checkCollisionWithBricks(screen, bricks)
+    local bx, by, bw, bh = screen.ball:getViewport()
+
+    for i = #bricks, 1, -1 do
+        local brx, bry, brw, brh = bricks[i]:getViewport()
         local ret, side = checkCollision(bx, by, bw, bh, brx, bry, brw, brh)
         if ret then
             screen.ball:hit(side)
-            screen.bricks[i]:hit()
-            if screen.bricks[i].isBroken then
-                table.remove(screen.bricks, i)
+            bricks[i]:hit()
+            if bricks[i].isBroken then
+                screen.grid:destroyBrick(i)
             end
         end
     end
+end
+
+local function updateBall(self, screen, dt)
+    screen.ball:update(dt)
+
+    checkCollisionWithPad(screen)
+    checkCollisionWithBricks(screen, screen.grid.bricks)
+    checkCollisionWithBricks(screen, screen.grid.indestructibleBricks)
+
     if screen.ball.x < 0 then
         screen.ball.x = 0
         screen.ball:hit("left")
@@ -78,7 +95,7 @@ local function updateBall(self, screen, dt)
 end
 
 local function checkObjective(self)
-    if #self.screen.bricks == 0 then
+    if #screen.grid.bricks == 0 then
         self.winner = true
         self.gameOver = true
     end
@@ -103,6 +120,10 @@ end
 
 function Controller:mousepressed(x, y, button)
     self.paused = false
+    if self.winner or self.gameOver then
+        local StageSelect = require("screens.StageSelect")
+        SetScreen(StageSelect)
+    end
 end
 
 function Controller:update(dt)

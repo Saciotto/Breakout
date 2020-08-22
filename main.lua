@@ -15,7 +15,7 @@ function love.load()
     love.window.setTitle("Breakout")
 
     -- Load assets
-    Sprites = AssetsManager.loadSprites("assets/images/breakout.xml")
+    Sprites = AssetsManager.loadSprites("assets/images/Tiles.xml")
 
     -- Set first screen
     SetScreen(SplashScreen)

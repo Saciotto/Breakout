@@ -16,17 +16,10 @@ function Renderer.draw(screen)
     end
     love.graphics.setColor(1,1,1)
 
-    screen.pad:draw()
-    for k,brick in pairs(screen.bricks) do
-        brick:draw()
+    for k,entity in pairs(screen.entities) do
+        entity:draw()
     end
-    screen.ball:draw()
-    if screen.controller.winner then
-        love.graphics.print("Vencedor")    
-    end
-    if screen.controller.loser then
-        love.graphics.print("Perdedor")
-    end
+
     screen.camera:unset()
 end
 
