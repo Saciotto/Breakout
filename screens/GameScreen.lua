@@ -23,6 +23,8 @@ local function getColor(c)
         return 'white'
     elseif c == 'y' or c == 'Y' then
         return 'yellow'
+    elseif c == 'x' or c == 'X' then
+        return 'metal'
     else
         return 'white'
     end
@@ -30,7 +32,13 @@ end
 
 local function createBlock(c, i, j, lenght)
     local color = getColor(c)
-    local brick = Brick:new(Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, color, lenght)
+    local brick = {}
+    if color == "metal" then
+        brick = Brick:new(Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, "white", lenght)
+        brick.indestrutible = true
+    else
+        brick = Brick:new(Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, color, lenght)
+    end
     return brick
 end
 

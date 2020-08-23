@@ -12,15 +12,15 @@ function BricksGrid:new()
 end
 
 function BricksGrid:addBrick(brick)
-    table.insert(self.bricks, brick)
+    if brick.indestrutible then
+        table.insert(self.indestructibleBricks, brick)
+    else
+        table.insert(self.bricks, brick)
+    end
 end
 
 function BricksGrid:destroyBrick(index)
     table.remove(self.bricks, index)
-end
-
-function BricksGrid:addIndestrutibleBrick(brick)
-    table.insert(self.indestructibleBricks, brick)
 end
 
 function BricksGrid:draw()
