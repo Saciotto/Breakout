@@ -1,7 +1,6 @@
---- Ball class
-
+local Colors = require("helpers.Colors")
+local Entity = require("helpers.Entity")
 local Constants = require("Constants")
-local Entity = require("Entity")
 
 local Ball = Entity:new()
 
@@ -12,7 +11,7 @@ end
 
 function Ball:new(x, y, velocity, angle)
     local side =  Constants.BALL_RADIUS * 2
-    local o = Entity:new(nil, x, y, side, side, Sprites["ball"], Constants.COLOR_RED)
+    local o = Entity:new(nil, x, y, side, side, Sprites["ball"], Colors.RED)
     setmetatable(o, self)
     self.__index = self
     o.velocity = velocity or Constants.BALL_VELOCITY

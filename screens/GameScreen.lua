@@ -2,13 +2,13 @@
 
 local Constants = require("Constants")
 local Controller = require("Controller")
-local Camera = require("Camera")
-local Renderer = require("Renderer")
-local Screen = require("Screen")
+
 local Brick = require("entities.Brick")
 local BricksGrid = require("entities.BricksGrid")
 local Ball = require("entities.Ball")
 local Pad = require("entities.Pad")
+
+local Screen = require("helpers.Screen")
 
 local GameScreen = Screen:new()
 
@@ -102,10 +102,6 @@ end
 
 function GameScreen:keypressed(key, unicode)
     self.controller:keypressed(key, unicode)
-end
-
-function GameScreen:draw()
-    Renderer.draw(self)
 end
 
 return GameScreen

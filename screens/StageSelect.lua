@@ -1,8 +1,6 @@
 
 local Constants = require("Constants")
-local Screen = require("Screen")
-local Camera = require("Camera")
-local Renderer = require("Renderer")
+local Screen = require("helpers.Screen")
 local GameScreen = require("screens.GameScreen")
 
 local StageSelect = Screen:new()
@@ -16,10 +14,6 @@ end
 
 function StageSelect.mousepressed(x, y, button)
     SetScreen(GameScreen)
-end
-
-function StageSelect:draw()
-    Renderer.draw(self)
 end
 
 return StageSelect

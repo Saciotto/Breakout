@@ -1,6 +1,4 @@
-
-local Screen = require("Screen")
-local Renderer = require("Renderer")
+local Screen = require("helpers.Screen")
 local StageSelect = require("screens.StageSelect")
 
 local SplashScreen = Screen:new()
@@ -21,7 +19,7 @@ function SplashScreen.mousepressed(x, y, button)
 end
 
 function SplashScreen:draw()
-    Renderer.draw(self)
+    Screen.draw(self)
     love.graphics.print("Splash Screen (" .. _VERSION .. ")")
 end
 

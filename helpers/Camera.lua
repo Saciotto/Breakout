@@ -1,4 +1,4 @@
---- Camera class
+local DefaultViewport = require("helpers.DefaultViewport")
 
 local Camera = {
     sceneWidth,
@@ -14,8 +14,8 @@ function Camera:new(width, height, scaleMethod)
     local o = {}
     setmetatable(o, self)
     self.__index = self
-    o.sceneWidth = width or Constants.SCREEN_WIDTH
-    o.sceneHeight = height or Constants.SCREEN_HEIGHT
+    o.sceneWidth = width or DefaultViewport.WIDTH
+    o.sceneHeight = height or DefaultViewport.HEIGHT
     o.scaleMethod = scaleMethod or "ORIGINAL"
     return o
 end

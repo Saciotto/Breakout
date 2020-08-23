@@ -1,7 +1,5 @@
---- Brick class
-
+local Entity = require("helpers.Entity")
 local Constants = require("Constants")
-local Entity = require("Entity")
 
 local Brick = Entity:new()
 

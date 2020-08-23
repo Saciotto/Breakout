@@ -1,7 +1,5 @@
---- Entity super class
-
-local Constants = require("Constants")
-local AssetsManager = require("AssetsManager")
+local Colors = require("helpers.Colors")
+local AssetsManager = require("helpers.AssetsManager")
 
 local Entity = {}
 
@@ -14,7 +12,7 @@ function Entity:new(o, x, y, width, height, sprite, debugColor)
     o.width = width or 1
     o.height = height or 1
     o.sprite = sprite
-    o.debugColor = debugColor or Constants.COLOR_WHITE
+    o.debugColor = debugColor or Colors.WHITE
     return o
 end
 

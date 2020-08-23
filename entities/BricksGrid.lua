@@ -1,6 +1,4 @@
---- BricksGrid class
-
-local Entity = require("Entity")
+local Entity = require("helpers.Entity")
 
 local BricksGrid = Entity:new()
 

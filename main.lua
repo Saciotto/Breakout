@@ -1,8 +1,7 @@
 --- Love2d entry point
 
 local Constants = require("Constants")
-local Camera = require("Camera")
-local AssetsManager = require("AssetsManager")
+local AssetsManager = require("helpers.AssetsManager")
 local SplashScreen = require("screens.SplashScreen")
 
 function SetScreen(NewScreen)
