@@ -6,7 +6,7 @@ local Brick = Entity:new()
 function Brick:new(x, y, color, len)
     height = heght or Constants.BRICK_HEIGHT
     local debugColor = {math.random(), math.random(), math.random()}
-    local o = Entity:new(o, x, y, nil, height, nil, debugColor)
+    local o = Entity:new(nil, x, y, nil, height, nil, debugColor)
     setmetatable(o, self)
     self.__index = self
     o.sleft = Sprites["brick_" .. color .. "_left"]

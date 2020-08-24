@@ -26,10 +26,14 @@ function Renderer:draw()
         love.graphics.rectangle("fill", 0, 0, self.screen.width, self.screen.height)
     end
 
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(1, 1, 1)
 
     for k, entity in pairs(self.screen.entities) do
         entity:draw()
+    end
+
+    for k, widget in pairs(self.screen.widgets) do
+        widget:draw()
     end
 
     screen.camera:unset()

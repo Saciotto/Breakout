@@ -100,16 +100,16 @@ function GameScreen:update(dt)
     self.controller:update(dt)
 end
 
-function GameScreen:mousemoved(x, y, dx, dy, istouch)
-    self.controller:mousemoved(x, y, dx, dy, istouch)
+function GameScreen:mouseMoved(x, y, dx, dy, istouch)
+    self.controller:mouseMoved(x, y, dx, dy, istouch)
 end
 
-function GameScreen:mousepressed(x, y, button)
-    self.controller:mousepressed(x, y, button)
+function GameScreen:mousePressed(x, y, button)
+    self.controller:mousePressed(x, y, button)
 end
 
-function GameScreen:keypressed(key, unicode)
-    self.controller:keypressed(key, unicode)
+function GameScreen:keyPressed(key, unicode)
+    self.controller:keyPressed(key, unicode)
 end
 
 return GameScreen

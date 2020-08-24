@@ -101,7 +101,7 @@ local function checkObjective(self)
     end
 end
 
-function Controller:mousemoved(x, y, dx, dy, istouch)
+function Controller:mouseMoved(x, y, dx, dy, istouch)
     local newX, newY = self.screen.camera:transform(x, y)
     self.screen.pad.x = newX - (self.screen.pad:getWidth() / 2)
 end
@@ -114,11 +114,11 @@ function Controller:new(screen)
     return o
 end
 
-function Controller:keypressed(key, unicode)
+function Controller:keyPressed(key, unicode)
     self.paused = false
 end
 
-function Controller:mousepressed(x, y, button)
+function Controller:mousePressed(x, y, button)
     self.paused = false
     if self.winner or self.gameOver then
         local StageSelect = require("screens.StageSelect")

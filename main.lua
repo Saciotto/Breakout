@@ -29,13 +29,17 @@ function love.draw()
 end
 
 function love.keypressed(key, unicode)
-    screen:keypressed(key, unicode)
+    screen:keyPressed(key, unicode)
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
-    screen:mousemoved(x, y, dx, dy, istouch)
+    screen:mouseMoved(x, y, dx, dy, istouch)
 end
 
 function love.mousepressed(x, y, button)
-    screen:mousepressed(x, y, button)
+    screen:mousePressed(x, y, button)
+end
+
+function love.mousereleased(x, y, button)
+    screen:mouseReleased(x, y, button)
 end

@@ -10,11 +10,11 @@ function SplashScreen:new()
     return o
 end
 
-function SplashScreen:keypressed(key, unicode)
+function SplashScreen:keyPressed(key, unicode)
     SetScreen(StageSelect)
 end
 
-function SplashScreen.mousepressed(x, y, button)
+function SplashScreen.mousePressed(x, y, button)
     SetScreen(StageSelect)
 end
 
