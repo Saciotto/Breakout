@@ -1,5 +1,7 @@
 local Colors = require("helpers.Colors")
 local Entity = require("helpers.Entity")
+local Renderer = require("helpers.Renderer")
+local Animation = require("helpers.Animation")
 local Constants = require("Constants")
 
 local Ball = Entity:new()
@@ -11,7 +13,7 @@ end
 
 function Ball:new(x, y, velocity, angle)
     local side =  Constants.BALL_RADIUS * 2
-    local o = Entity:new(nil, x, y, side, side, Sprites["ball"], Colors.RED)
+    local o = Entity:new(x, y, side, side, Sprites["ball"], Colors.RED)
     setmetatable(o, self)
     self.__index = self
     o.velocity = velocity or Constants.BALL_VELOCITY
@@ -23,6 +25,7 @@ end
 function Ball:update(dt)
     self.x = self.x + self.dx * dt
     self.y = self.y + self.dy * dt
+    Entity.update(self, dt)
 end
 
 function Ball:setVelocity(velocity)
@@ -50,10 +53,6 @@ end
 function Ball:hitPad(cos)
     self.angle = math.pi + math.acos(-1 * cos) 
     updateDeltaV(self)
-end
-
-function Ball:draw()
-    self.drawItem(self.sprite, self.debugColor, self.x, self.y, self.width, self.height)
 end
 
 return Ball

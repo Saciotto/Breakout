@@ -1,4 +1,5 @@
 local Entity = require("helpers.Entity")
+local Renderer = require("helpers.Renderer")
 local Constants = require("Constants")
 
 local Brick = Entity:new()
@@ -6,7 +7,7 @@ local Brick = Entity:new()
 function Brick:new(x, y, color, len)
     height = heght or Constants.BRICK_HEIGHT
     local debugColor = {math.random(), math.random(), math.random()}
-    local o = Entity:new(nil, x, y, nil, height, nil, debugColor)
+    local o = Entity:new(x, y, nil, height, nil, debugColor)
     setmetatable(o, self)
     self.__index = self
     o.sleft = Sprites["brick_" .. color .. "_left"]
@@ -33,17 +34,17 @@ function Brick:draw()
     end
     -- 1x1 brick
     if  self.len == 1 then
-        self.drawItem(self.ssquare, self.debugColor, self.x, self.y, Constants.BRICK_WIDTH, self.height)
+        Renderer.drawSprite(self.ssquare, self.debugColor, self.x, self.y, Constants.BRICK_WIDTH, self.height)
         return
     end
     -- Xx1 brick
-    self.drawItem(self.sleft, self.debugColor, self.x, self.y, Constants.BRICK_WIDTH, self.height)
+    Renderer.drawSprite(self.sleft, self.debugColor, self.x, self.y, Constants.BRICK_WIDTH, self.height)
     local pos = self.x + Constants.BRICK_WIDTH
     for i = 2, self.len - 1, 1 do
-        self.drawItem(self.smid, self.debugColor, pos, self.y, Constants.BRICK_WIDTH, self.height)
+        Renderer.drawSprite(self.smid, self.debugColor, pos, self.y, Constants.BRICK_WIDTH, self.height)
         pos = pos + Constants.BRICK_WIDTH
     end
-    self.drawItem(self.sright, self.debugColor, pos, self.y, Constants.BRICK_WIDTH, self.height)
+    Renderer.drawSprite(self.sright, self.debugColor, pos, self.y, Constants.BRICK_WIDTH, self.height)
 end
 
 return Brick
