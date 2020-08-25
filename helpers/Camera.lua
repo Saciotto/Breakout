@@ -41,7 +41,7 @@ end
 
 function Camera:transform(x, y)
     newX = (x - self.offsetX) / self.scaleX
-    newY = (x - self.offsetY) / self.scaleY
+    newY = (y - self.offsetY) / self.scaleY
     return newX, newY
 end
 

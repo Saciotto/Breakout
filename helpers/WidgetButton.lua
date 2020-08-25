@@ -34,7 +34,7 @@ function WidgetButton:mouseReleased(x, y, button)
     self.clicked = false
 end
 
-function WidgetButton:mouseMoved(x, y, dx, dy, istouch)
+function WidgetButton:mouseMoved(x, y, dx, dy)
     if not self:isEventInsideWidget(x, y) and self.clicked then
         self.clicked = false
     end

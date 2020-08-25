@@ -1,5 +1,5 @@
 local Colors = require("helpers.Colors")
-local AssetsManager = require("helpers.AssetsManager")
+local Renderer = require("helpers.Renderer")
 
 local Entity = {}
 
@@ -24,15 +24,7 @@ function Entity:update(dt)
 end
 
 function Entity.drawItem(sprite, debugColor, x, y, w, h)
-    if sprite ~= nil then
-        AssetsManager.drawSprite(sprite, x, y, w, h)
-    else
-        -- Sprite error, show debug rectangle
-        love.graphics.setColor(debugColor or {1,1,1})
-        love.graphics.rectangle("fill", x, y, w, h)
-        -- reset graphic color
-        love.graphics.setColor(1,1,1)
-    end
+    Renderer.drawSprite(sprite, debugColor, x, y, w, h)
 end
 
 function Entity:draw()

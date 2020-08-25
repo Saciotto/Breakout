@@ -33,13 +33,13 @@ function love.keypressed(key, unicode)
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
-    screen:mouseMoved(x, y, dx, dy, istouch)
+    screen:invokeMouseMoved(x, y, dx, dy)
 end
 
 function love.mousepressed(x, y, button)
-    screen:mousePressed(x, y, button)
+    screen:invokeMousePressed(x, y, button)
 end
 
 function love.mousereleased(x, y, button)
-    screen:mouseReleased(x, y, button)
+    screen:invokeMouseReleased(x, y, button)
 end

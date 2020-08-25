@@ -25,7 +25,7 @@ end
 function Widget:keyPressed(key, unicode)
 end
 
-function Widget:mouseMoved(x, y, dx, dy, istouch)
+function Widget:mouseMoved(x, y, dx, dy)
 end
 
 function Widget:mousePressed(x, y, button)

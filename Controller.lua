@@ -101,9 +101,8 @@ local function checkObjective(self)
     end
 end
 
-function Controller:mouseMoved(x, y, dx, dy, istouch)
-    local newX, newY = self.screen.camera:transform(x, y)
-    self.screen.pad.x = newX - (self.screen.pad:getWidth() / 2)
+function Controller:mouseMoved(x, y, dx, dy)
+    self.screen.pad.x = x - (self.screen.pad:getWidth() / 2)
 end
 
 function Controller:new(screen)

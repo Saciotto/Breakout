@@ -1,30 +1,14 @@
-
 local xml2lua = require("xml2lua.xml2lua")
 local handler = require("xml2lua.xmlhandler.tree")
 
 local AssetsManager = {}
 
+-- Creates a new sprite from a tileset
 function AssetsManager.newSprite(x, y, width, height, image)
     local sprite = {}
     sprite.quad = love.graphics.newQuad(x, y, width, height, image:getDimensions())
     sprite.image = image
     return sprite
-end
-
---- Scales and draws a sprite.
-function AssetsManager.drawSprite(sprite, x, y, width, height)
-    local sx, sy, sw, sh = sprite.quad:getViewport()
-    width = width or sw
-    height =  height or sh
-    love.graphics.draw(sprite.image, sprite.quad, x, y, 0, width/sw, height/sh)
-end
-
---- Scales and draws a image.
-function AssetsManager.drawImage(image, x, y, width, height)
-    iw, ih = image:getDimensions()
-    width = width or sw
-    height =  height or sh
-    love.graphics.draw(image, x, y, 0, width/iw, height/ih)
 end
 
 --- Loads a sprite list from a tileset.
