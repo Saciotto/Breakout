@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnimationAtlas name="atlas">
+    <!--Example
+    <animation n="example_animation">
+        <frame s="sprite1" d="0.1"/>
+        <frame s="sprite2" d="0.1"/>
+        <frame s="sprite3" d="0.1"/>
+        <frame s="sprite4" d="0.1"/>
+    </animation>
+    -->
+</AnimationAtlas>

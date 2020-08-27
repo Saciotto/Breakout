@@ -15,6 +15,7 @@ function love.load()
 
     -- Load assets
     Sprites = AssetsManager.loadSprites("assets/images/Tiles.xml")
+    Animations = AssetsManager.loadAnimations("assets/images/Animations.xml", Sprites)
 
     -- Set first screen
     SetScreen(SplashScreen)
