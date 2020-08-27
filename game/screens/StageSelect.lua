@@ -1,9 +1,8 @@
 
-local Screen = require("helpers.Screen")
-local WidgetButton = require("helpers.WidgetButton")
-
-local Constants = require("Constants")
-local GameScreen = require("screens.GameScreen")
+local Screen = require("engine.Screen")
+local Button = require("engine.widget.Button")
+local Constants = require("game.Constants")
+local GameScreen = require("game.screens.GameScreen")
 
 local StageSelect = Screen:new()
 
@@ -20,7 +19,7 @@ local function loadStage()
 end
 
 function StageSelect:load()
-    button = WidgetButton:new(50, 50, 100, 100, "Iniciar")
+    button = Button:new(50, 50, 100, 100, "Iniciar")
     button.onClick = loadStage
     self.widgets = {button}
 end

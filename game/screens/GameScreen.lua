@@ -1,14 +1,12 @@
 --- GameScreen class
 
-local Constants = require("Constants")
-local Controller = require("Controller")
-
-local Brick = require("entities.Brick")
-local BricksGrid = require("entities.BricksGrid")
-local Ball = require("entities.Ball")
-local Pad = require("entities.Pad")
-
-local Screen = require("helpers.Screen")
+local Screen = require("engine.Screen")
+local Constants = require("game.Constants")
+local Controller = require("game.Controller")
+local Brick = require("game.entities.Brick")
+local BricksGrid = require("game.entities.BricksGrid")
+local Ball = require("game.entities.Ball")
+local Pad = require("game.entities.Pad")
 
 local GameScreen = Screen:new()
 

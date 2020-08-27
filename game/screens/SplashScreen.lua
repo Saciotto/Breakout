@@ -1,5 +1,5 @@
-local Screen = require("helpers.Screen")
-local StageSelect = require("screens.StageSelect")
+local Screen = require("engine.Screen")
+local StageSelect = require("game.screens.StageSelect")
 
 local SplashScreen = Screen:new()
 

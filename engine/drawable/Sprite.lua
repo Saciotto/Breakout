@@ -1,6 +1,6 @@
-local Renderer = require("helpers.Renderer")
-local Drawable = require("helpers.Drawable")
-local Colors = require("helpers.Colors")
+local Renderer = require("engine.Renderer")
+local Colors = require("engine.Colors")
+local Drawable = require("engine.Drawable")
 
 local Sprite = Drawable:new()
 

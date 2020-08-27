@@ -1,5 +1,5 @@
 
-local Constants = require("Constants")
+local Constants = require("game.Constants")
 
 local Controller = {
     gameOver = false,

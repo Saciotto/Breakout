@@ -1,5 +1,5 @@
-local Colors = require("helpers.Colors")
-local Renderer = require("helpers.Renderer")
+local Colors = require("engine.Colors")
+local Renderer = require("engine.Renderer")
 
 local Drawable = {}
 

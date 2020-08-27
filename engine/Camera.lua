@@ -1,4 +1,4 @@
-local DefaultViewport = require("helpers.DefaultViewport")
+local DefaultViewport = require("engine.DefaultViewport")
 
 local Camera = {
     sceneWidth,

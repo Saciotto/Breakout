@@ -1,8 +1,8 @@
 --- Love2d entry point
 
-local Constants = require("Constants")
-local AssetsManager = require("helpers.AssetsManager")
-local SplashScreen = require("screens.SplashScreen")
+local AssetsManager = require("engine.AssetsManager")
+local Constants = require("game.Constants")
+local SplashScreen = require("game.screens.SplashScreen")
 
 function SetScreen(NewScreen)
     screen = NewScreen:new()

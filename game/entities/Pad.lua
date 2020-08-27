@@ -1,6 +1,6 @@
-local Entity = require("helpers.Entity")
-local Renderer = require("helpers.Renderer")
-local Constants = require("Constants")
+local Entity = require("engine.Entity")
+local Renderer = require("engine.Renderer")
+local Constants = require("game.Constants")
 
 local Pad = Entity:new()
 

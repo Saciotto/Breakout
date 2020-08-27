@@ -1,6 +1,6 @@
-local Camera = require("helpers.Camera")
-local Renderer = require("helpers.Renderer")
-local DefaultViewport = require("helpers.DefaultViewport")
+local Camera = require("engine.Camera")
+local Renderer = require("engine.Renderer")
+local DefaultViewport = require("engine.DefaultViewport")
 
 local Screen = {}
 
