@@ -1,7 +1,10 @@
 
 local Screen = require("engine.Screen")
 local Button = require("engine.widget.Button")
+local Label = require("engine.widget.Label")
+local Colors = require("engine.Colors")
 local Constants = require("game.Constants")
+local Fonts = require("game.Fonts")
 local GameScreen = require("game.screens.GameScreen")
 
 local StageSelect = Screen:new()
@@ -19,7 +22,7 @@ local function loadStage()
 end
 
 function StageSelect:load()
-    button = Button:new(50, 50, 100, 100, "Iniciar")
+    button = Button:new(50, 50, 100, 100, Label:new("Iniciar", Colors.BLACK, Fonts.DEJAVU))
     button.onClick = loadStage
     self.widgets = {button}
 end

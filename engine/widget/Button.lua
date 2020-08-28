@@ -1,24 +1,29 @@
 local Widget = require("engine.Widget")
+local Colors = require("engine.Colors")
+local Label = require("engine.widget.Label")
 
 local Button = Widget:new()
 
-function Button:new(x, y, width, height, text)
-    local o = Widget:new(nil, x, y, width, height)
-    setmetatable(o, self)
+function Button:new(x, y, width, height, label)
+    local button = Widget:new(nil, x, y, width, height)
+    setmetatable(button, self)
     self.__index = self
-    o.text = text or ""
-    o.clicked = false
-    o.onClick = nil
-    return o
+    button.label = label
+    button.clicked = false
+    button.onClick = nil
+    button.label:setArea(x, y, width, height)
+    button.label:setAlign("center", "middle")
+    return button
+end
+
+function Button:formatText(font, color, size)
+    self.label:setFont(font, size)
+    self.label.color = color
 end
 
 function Button:draw()
     Widget.draw(self)
-    coloredText = {
-        {0,0,0},
-        self.text
-    }
-    love.graphics.print(coloredText, self.x, self.y)
+    self.label:draw()
 end
 
 function Button:mousePressed(x, y, button)

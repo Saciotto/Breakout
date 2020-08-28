@@ -120,7 +120,7 @@ end
 function Controller:mousePressed(x, y, button)
     self.paused = false
     if self.winner or self.gameOver then
-        local StageSelect = require("screens.StageSelect")
+        local StageSelect = require("game.screens.StageSelect")
         SetScreen(StageSelect)
     end
 end

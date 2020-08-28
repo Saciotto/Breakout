@@ -25,6 +25,13 @@ function Entity:update(dt)
     self.drawable:update(dt)
 end
 
+function Entity:setArea(x, y, width, height)
+    self.x = x
+    self.y = y
+    self.width = width
+    self.height = height
+end
+
 function Entity:draw()
     self.drawable:draw(self:getViewport())
 end
