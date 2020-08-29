@@ -1,5 +1,5 @@
-local Widget = require("engine.Widget")
-local Colors = require("engine.Colors")
+local Widget = engine.Widget
+local Colors = engine.Colors
 
 local Label = Widget:new()
 

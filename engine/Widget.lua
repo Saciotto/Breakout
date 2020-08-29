@@ -1,10 +1,8 @@
-local Entity = require("engine.Entity")
-
-local Widget = Entity:new()
+local Widget = engine.Entity:new()
 
 function Widget:new(o, x, y, width, height)
     local o = o or  {}
-    o = Entity:new(x, y, width, height)
+    o = engine.Entity:new(x, y, width, height)
     setmetatable(o, self)
     self.__index = self
     return o

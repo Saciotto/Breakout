@@ -1,5 +1,6 @@
-local Entity = require("engine.Entity")
-local Renderer = require("engine.Renderer")
+local Entity = engine.Entity
+local Renderer = engine.Renderer
+
 local Constants = require("game.Constants")
 
 local Brick = Entity:new()

@@ -1,7 +1,8 @@
-local Colors = require("engine.Colors")
-local Entity = require("engine.Entity")
-local Renderer = require("engine.Renderer")
-local Animation = require("engine.drawable.Animation")
+local Colors = engine.Colors
+local Entity = engine.Entity
+local Renderer = engine.Renderer
+local Animation = engine.drawable.Animation
+
 local Constants = require("game.Constants")
 
 local Ball = Entity:new()

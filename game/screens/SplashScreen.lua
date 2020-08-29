@@ -1,5 +1,6 @@
-local Screen = require("engine.Screen")
-local Label = require("engine.widget.Label")
+local Screen = engine.Screen
+local Label = engine.widget.Label
+
 local Fonts = require("game.Fonts")
 local StageSelect = require("game.screens.StageSelect")
 

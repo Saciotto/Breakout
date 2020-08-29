@@ -1,5 +1,3 @@
-local DefaultViewport = require("engine.DefaultViewport")
-
 local Camera = {
     sceneWidth,
     sceneHeight,
@@ -14,8 +12,8 @@ function Camera:new(width, height, scaleMethod)
     local o = {}
     setmetatable(o, self)
     self.__index = self
-    o.sceneWidth = width or DefaultViewport.WIDTH
-    o.sceneHeight = height or DefaultViewport.HEIGHT
+    o.sceneWidth = width or engine.DefaultViewport.WIDTH
+    o.sceneHeight = height or engine.DefaultViewport.HEIGHT
     o.scaleMethod = scaleMethod or "ORIGINAL"
     return o
 end

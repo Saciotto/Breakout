@@ -1,6 +1,4 @@
-local Renderer = require("engine.Renderer")
-local Colors = require("engine.Colors")
-local Drawable = require("engine.Drawable")
+local Drawable = engine.Drawable
 
 local Sprite = Drawable:new()
 
@@ -14,7 +12,7 @@ function Sprite:new(x, y, width, height, image)
 end
 
 function Sprite:draw(x, y, width, height)
-    Renderer.drawSprite(self, Colors.RED, x, y, width, height)
+    engine.Renderer.drawSprite(self, engine.Colors.RED, x, y, width, height)
 end
 
 return Sprite

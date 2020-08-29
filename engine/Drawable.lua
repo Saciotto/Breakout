@@ -1,6 +1,3 @@
-local Colors = require("engine.Colors")
-local Renderer = require("engine.Renderer")
-
 local Drawable = {}
 
 function Drawable:new()
@@ -14,7 +11,7 @@ function Drawable:update(dt)
 end
 
 function Drawable:draw(x, y, width, height)
-    Renderer.drawRect(x, y, width, height, Colors.WHITE)
+    engine.Renderer.drawRect(x, y, width, height, engine.Colors.WHITE)
 end
 
 return Drawable

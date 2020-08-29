@@ -1,5 +1,7 @@
 --- Love2d entry point
 
+require("engine.init")
+
 local AssetsManager = require("engine.AssetsManager")
 local Constants = require("game.Constants")
 local SplashScreen = require("game.screens.SplashScreen")

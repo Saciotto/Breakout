@@ -1,8 +1,9 @@
 --- GameScreen class
 
-local Screen = require("engine.Screen")
-local Label = require("engine.widget.Label")
-local FramesCounter = require("engine.FramesCounter")
+local Screen = engine.Screen
+local Label = engine.widget.Label
+local FramesCounter = engine.FramesCounter
+
 local Constants = require("game.Constants")
 local Controller = require("game.Controller")
 local Brick = require("game.entities.Brick")

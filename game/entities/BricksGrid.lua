@@ -1,4 +1,4 @@
-local Entity = require("engine.Entity")
+local Entity = engine.Entity
 
 local BricksGrid = Entity:new()
 
