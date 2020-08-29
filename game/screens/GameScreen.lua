@@ -1,12 +1,15 @@
 --- GameScreen class
 
 local Screen = require("engine.Screen")
+local Label = require("engine.widget.Label")
+local FramesCounter = require("engine.FramesCounter")
 local Constants = require("game.Constants")
 local Controller = require("game.Controller")
 local Brick = require("game.entities.Brick")
 local BricksGrid = require("game.entities.BricksGrid")
 local Ball = require("game.entities.Ball")
 local Pad = require("game.entities.Pad")
+local Fonts = require("game.Fonts")
 
 local GameScreen = Screen:new()
 
@@ -92,10 +95,16 @@ function GameScreen:load()
         self.ball,
         self.grid
     }
+    self.fps = Label:new("", {1,1,1})
+    self.fps:setFont(Fonts.DEJAVU, 20)
+    self.widgets = {
+        self.fps
+    }
 end
 
 function GameScreen:update(dt)
     self.controller:update(dt)
+    self.fps.text = "FPS: " .. string.format("%.0f", FramesCounter:getFPS(dt))
 end
 
 function GameScreen:mouseMoved(x, y, dx, dy)
