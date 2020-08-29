@@ -15,8 +15,12 @@ function love.load()
     love.window.setTitle("Breakout")
 
     -- Load assets
+    Gui = AssetsManager.loadSprites("assets/images/gui.xml")
     Sprites = AssetsManager.loadSprites("assets/images/Tiles.xml")
     Animations = AssetsManager.loadAnimations("assets/images/Animations.xml", Sprites)
+
+    Label.setDefaultFont(Fonts.DEJAVU, 20)
+    Button.setDefualtSprites(Gui.Button_09, Gui.Button_10)
 
     -- Set first screen
     SetScreen(SplashScreen)

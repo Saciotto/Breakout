@@ -1,6 +1,7 @@
 --- GameScreen class
 
 local GameScreen = Screen:new()
+GameScreen.stage = 1
 
 local function getColor(c)
     if c == 'b' or c == 'B' then
@@ -33,7 +34,7 @@ local function createBlock(c, i, j, lenght)
 end
 
 local function readMap(self)
-    local filename = "./assets/maps/stage1.txt"
+    local filename = "./assets/maps/stage" .. self.stage .. ".txt"
     local i = 0
     for line in io.lines(filename) do
         local c = '.'
@@ -81,6 +82,7 @@ function GameScreen:load()
     local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
 
     createBlocks(self)
+    self.stage = GameScreen.stage
     self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
     self.pad = Pad:new()
     self.background = love.graphics.newImage("assets/images/SunnyDay.png")

@@ -8,14 +8,44 @@ function StageSelect:new()
     return o
 end
 
-local function loadStage()
+local function loadStage(button)
+    GameScreen.stage = button.stage
     SetScreen(GameScreen)
 end
 
+local function createStageButton(stage, enabled)
+    local i = (stage - 1) % 8
+    local j = math.floor((stage - 1) / 8)
+    local x = 134 + 20 + (i * 120)
+    local y = 100 + 20 + (j * 120)
+    local text = ""
+
+    if enabled then text = tostring(stage) end
+
+    local button = Button:new(x, y, 100, 100, text)
+    button:formatText(Fonts.TOONEY_NOODLE, Colors.BLACK, 60)
+    button.stage = stage
+
+    if enabled then 
+        button.click = loadStage
+    else
+        button:setSprites(Gui.Button_101, Gui.Button_101)
+    end
+    return button
+end
+
 function StageSelect:load()
-    button = Button:new(50, 50, 100, 100, Label:new("Iniciar", Colors.BLACK, Fonts.DEJAVU))
-    button.onClick = loadStage
-    self.widgets = {button}
+    self.background = love.graphics.newImage("assets/images/SunnyDay.png")
+    window = Window:new(134, 100, Constants.SCREEN_WIDTH - 268, Constants.SCREEN_HEIGHT - 200)
+
+    self.nextStage = 1
+    self.widgets = {
+        window
+    }
+    for stage = 1, 32, 1 do
+        local button = createStageButton(stage, stage <= self.nextStage)
+        table.insert(self.widgets, button)
+    end
 end
 
 return StageSelect

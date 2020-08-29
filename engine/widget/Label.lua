@@ -1,5 +1,8 @@
 local Label = Widget:new()
 
+Label.defaultFont = nil
+Label.defualtSize = 20
+
 function Label:new(text, color, font, size, x, y, width, height, alignX, alignY)
     width = width or 0
     height = height or 0
@@ -8,9 +11,10 @@ function Label:new(text, color, font, size, x, y, width, height, alignX, alignY)
     self.__index = self
     label.text = text or ""
     label.color = color or Colors.BLACK
-    if font ~= nil then
-        size = size or 16
-        label:setFont(font, size)
+    label.font = font or Label.defaultFont
+    label.size = size or Label.defualtSize
+    if label.font ~= nil then
+        label:setFont(label.font, label.size)
     end
     self.alignX = alignX or "left"
     self.alignY = alignY or "middle"
@@ -18,7 +22,7 @@ function Label:new(text, color, font, size, x, y, width, height, alignX, alignY)
 end
 
 function Label:setFont(font, size)
-    size = size or 16
+    size = size or Label.defualtSize
     self.font = love.graphics.newFont(font, size)
 end
 
@@ -41,9 +45,9 @@ function Label:drawLimitedXY(coloredText)
         y = self.y
     end
     
-    love.graphics.setScissor(self.x, self.y, self.width, self.height)
+    --love.graphics.setScissor(self.x, self.y, self.width, self.height)
     love.graphics.printf(coloredText, self.x, y, self.width, self.alignX)
-    love.graphics.setScissor()
+    --love.graphics.setScissor()
 end
 
 function Label:drawLimitedX(coloredText)
@@ -72,6 +76,11 @@ function Label:draw()
     else
         self:drawUnlimited(coloredText)
     end
+end
+
+function Label.setDefaultFont(font, size)
+    Label.defaultFont = font
+    Label.defualtSize = size
 end
 
 return Label

@@ -1,4 +1,5 @@
 local xml2lua = require("engine.xml2lua.xml2lua")
+local Handler = require("engine.xml2lua.xmlhandler.tree")
 
 local AssetsManager = {}
 
@@ -7,7 +8,7 @@ local AssetsManager = {}
 function AssetsManager.loadSprites(atlas)
     local sprites = {}
     local xml = xml2lua.loadFile(atlas)
-    local handler = require("engine.xml2lua.xmlhandler.tree")
+    local handler = Handler:new()
     handler.options.noreduce.sprite = true
     local parser = xml2lua.parser(handler)
     parser:parse(xml)
@@ -27,7 +28,7 @@ end
 function AssetsManager.loadAnimations(atlas, spriteBatch)
     local animations = {}
     local xml = xml2lua.loadFile(atlas)
-    local handler = require("engine.xml2lua.xmlhandler.tree")
+    local handler = Handler:new()
     handler.options.noreduce.animation = true
     handler.options.noreduce.frame = true
     local parser = xml2lua.parser(handler)
