@@ -63,6 +63,11 @@ local function readMap(self)
                 j1 = j - 1
             end
         end
+        if c ~= '.' then
+            print(j, j1)
+            local brick = createBlock(c, i, j1, line:len() - j1)
+            self.grid:addBrick(brick)
+        end
         i = i + 1
     end
 end
