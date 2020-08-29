@@ -1,6 +1,3 @@
-local Widget = engine.Widget
-local Colors = engine.Colors
-
 local Label = Widget:new()
 
 function Label:new(text, color, font, size, x, y, width, height, alignX, alignY)

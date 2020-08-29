@@ -1,10 +1,3 @@
-local Colors = engine.Colors
-local Entity = engine.Entity
-local Renderer = engine.Renderer
-local Animation = engine.drawable.Animation
-
-local Constants = require("game.Constants")
-
 local Ball = Entity:new()
 
 local function updateDeltaV(ball)

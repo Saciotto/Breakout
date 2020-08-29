@@ -11,7 +11,7 @@ function Drawable:update(dt)
 end
 
 function Drawable:draw(x, y, width, height)
-    engine.Renderer.drawRect(x, y, width, height, engine.Colors.WHITE)
+    Renderer.drawRect(x, y, width, height, Colors.WHITE)
 end
 
 return Drawable

@@ -1,7 +1,3 @@
-local Widget = engine.Widget
-local Colors = engine.Colors
-local Label = engine.widget.Label
-
 local Button = Widget:new()
 
 function Button:new(x, y, width, height, label)

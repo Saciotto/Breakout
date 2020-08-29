@@ -2,7 +2,7 @@ local Renderer = {}
 
 function Renderer.beginDrawing(camera)
     camera:set()
-    love.graphics.setBackgroundColor(engine.Colors.BLACK)
+    love.graphics.setBackgroundColor(Colors.BLACK)
 end
 
 function Renderer.endDrawing(camera)
@@ -17,7 +17,7 @@ end
 --- Scales and draws a image.
 function Renderer.drawImage(image, x, y, width, height)
     if image == nil then
-        Renderer.drawRect(x, y, width, height, engine.Colors.BLUE)
+        Renderer.drawRect(x, y, width, height, Colors.BLUE)
         return
     end
     iw, ih = image:getDimensions()

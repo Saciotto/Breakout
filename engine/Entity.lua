@@ -8,8 +8,8 @@ function Entity:new(x, y, width, height, drawable, debugColor)
     entity.y = y or 0
     entity.width = width or 1
     entity.height = height or 1
-    entity.drawable = drawable or engine.Drawable:new()
-    entity.debugColor = debugColor or engine.Colors.WHITE
+    entity.drawable = drawable or Drawable:new()
+    entity.debugColor = debugColor or Colors.WHITE
     return entity
 end
 

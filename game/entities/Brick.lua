@@ -1,8 +1,3 @@
-local Entity = engine.Entity
-local Renderer = engine.Renderer
-
-local Constants = require("game.Constants")
-
 local Brick = Entity:new()
 
 function Brick:new(x, y, color, len)

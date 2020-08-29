@@ -1,6 +1,3 @@
-
-local Constants = require("game.Constants")
-
 local Controller = {
     gameOver = false,
     winner = false,
@@ -120,7 +117,6 @@ end
 function Controller:mousePressed(x, y, button)
     self.paused = false
     if self.winner or self.gameOver then
-        local StageSelect = require("game.screens.StageSelect")
         SetScreen(StageSelect)
     end
 end

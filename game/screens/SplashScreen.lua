@@ -1,9 +1,3 @@
-local Screen = engine.Screen
-local Label = engine.widget.Label
-
-local Fonts = require("game.Fonts")
-local StageSelect = require("game.screens.StageSelect")
-
 local SplashScreen = Screen:new()
 
 function SplashScreen:new()

@@ -1,5 +1,3 @@
-local Drawable = engine.Drawable
-
 local Animation = Drawable:new()
 
 function Animation:new(frames)
@@ -29,7 +27,7 @@ function Animation:update(dt)
 end
 
 function Animation:draw(x, y, width, height)
-    engine.Renderer.drawSprite(self:getSprite(), engine.Colors.GREEN, x, y, width, height)
+    Renderer.drawSprite(self:getSprite(), Colors.GREEN, x, y, width, height)
 end
 
 return Animation

@@ -16,7 +16,7 @@ function AssetsManager.loadSprites(atlas)
     for i, xmlSprite in pairs(handler.root.TextureAtlas.sprite) do
         local name = xmlSprite._attr.n and xmlSprite._attr.n:match("(.+)%..+")
         if (name ~= nil) then
-            sprites[name] = engine.drawable.Sprite:new(xmlSprite._attr.x, xmlSprite._attr.y, xmlSprite._attr.w, xmlSprite._attr.h, image)
+            sprites[name] = Sprite:new(xmlSprite._attr.x, xmlSprite._attr.y, xmlSprite._attr.w, xmlSprite._attr.h, image)
         end
     end
     return sprites
@@ -42,7 +42,7 @@ function AssetsManager.loadAnimations(atlas, spriteBatch)
                     frames[idx].sprite = spriteBatch[xmlFrame._attr.s]
                     frames[idx].duration = tonumber(xmlFrame._attr.d)
                 end
-                animations[name] = engine.drawable.Animation:new(frames)
+                animations[name] = Animation:new(frames)
             end
         end
     end

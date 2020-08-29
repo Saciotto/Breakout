@@ -1,13 +1,3 @@
-
-local Screen = engine.Screen
-local Button = engine.widget.Button
-local Label = engine.widget.Label
-local Colors = engine.Colors
-
-local Constants = require("game.Constants")
-local Fonts = require("game.Fonts")
-local GameScreen = require("game.screens.GameScreen")
-
 local StageSelect = Screen:new()
 
 function StageSelect:new()

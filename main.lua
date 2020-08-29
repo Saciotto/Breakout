@@ -1,16 +1,15 @@
 --- Love2d entry point
 
-require("engine.init")
 
-local AssetsManager = require("engine.AssetsManager")
-local Constants = require("game.Constants")
-local SplashScreen = require("game.screens.SplashScreen")
 
 function SetScreen(NewScreen)
     screen = NewScreen:new()
 end
 
 function love.load()
+    require("engine.init")
+    require("game.init")
+
     -- Create window 
     love.window.setMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, {resizable = true})
     love.window.setTitle("Breakout")

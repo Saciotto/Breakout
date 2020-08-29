@@ -1,17 +1,5 @@
 --- GameScreen class
 
-local Screen = engine.Screen
-local Label = engine.widget.Label
-local FramesCounter = engine.FramesCounter
-
-local Constants = require("game.Constants")
-local Controller = require("game.Controller")
-local Brick = require("game.entities.Brick")
-local BricksGrid = require("game.entities.BricksGrid")
-local Ball = require("game.entities.Ball")
-local Pad = require("game.entities.Pad")
-local Fonts = require("game.Fonts")
-
 local GameScreen = Screen:new()
 
 local function getColor(c)

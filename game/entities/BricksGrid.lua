@@ -1,5 +1,3 @@
-local Entity = engine.Entity
-
 local BricksGrid = Entity:new()
 
 function BricksGrid:new()

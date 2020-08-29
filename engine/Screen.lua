@@ -5,9 +5,9 @@ function Screen:new(o, width, height)
     setmetatable(o, self)
     self.__index = self
     o.background = love.graphics.newImage("assets/images/GreenCardboard.png")
-    o.width = width or engine.DefaultViewport.WIDTH
-    o.height = height or engine.DefaultViewport.HEIGHT
-    o.camera = engine.Camera:new(o.width, o.height, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
+    o.width = width or DefaultViewport.WIDTH
+    o.height = height or DefaultViewport.HEIGHT
+    o.camera = Camera:new(o.width, o.height, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
     o.entities = {}
     o.widgets = {}
     return o
@@ -27,7 +27,6 @@ end
 
 function Screen:draw()
     self.camera:update()
-    local Renderer = engine.Renderer
     Renderer.beginDrawing(self.camera)
     Renderer.drawImage(self.background, 0, 0, self.width, self.height)
     self.drawSpriteBatch(self.entities)
