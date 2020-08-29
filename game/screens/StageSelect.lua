@@ -29,7 +29,7 @@ local function createStageButton(stage, enabled)
     if enabled then 
         button.click = loadStage
     else
-        button:setSprites(Gui.Button_101, Gui.Button_101)
+        button:setSprites(Buttons.button_locked, Buttons.button_locked)
     end
     return button
 end
@@ -38,9 +38,13 @@ function StageSelect:load()
     self.background = love.graphics.newImage("assets/images/SunnyDay.png")
     window = Window:new(134, 100, Constants.SCREEN_WIDTH - 268, Constants.SCREEN_HEIGHT - 200)
 
+    label = Label:new("Level Select", Colors.WHITE, Fonts.CHILANKA, 60, 0, 20, Constants.SCREEN_WIDTH)
+    label:setAlign("center", "top")
+
     self.nextStage = 1
     self.widgets = {
-        window
+        window,
+        label
     }
     for stage = 1, 32, 1 do
         local button = createStageButton(stage, stage <= self.nextStage)

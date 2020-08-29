@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:d2c8d81f416de1c844589f5c034b3a58:6fb42a6a31318099a3c25672b1bf5dea:336e91466504ac11351905e0c428ebfd$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Buttons.png" width="4048" height="927">
+    <sprite n="button_normal_label.png" x="0" y="0" w="406" h="160"/>
+    <sprite n="button_hover_label.png" x="406" y="0" w="407" h="160"/>
+    <sprite n="button_click_label.png" x="813" y="0" w="406" h="160"/>
+    <sprite n="button_locked_label.png" x="1219" y="0" w="406" h="160"/>
+    <sprite n="button_blue.png" x="1625" y="0" w="406" h="160"/>
+    <sprite n="button_green.png" x="2031" y="0" w="407" h="160"/>
+    <sprite n="button_yellow.png" x="2438" y="0" w="406" h="160"/>
+    <sprite n="button_grey.png" x="2844" y="0" w="406" h="160"/>
+    <sprite n="round_button_blue.png" x="3250" y="0" w="176" h="185"/>
+    <sprite n="round_button_green.png" x="3426" y="0" w="176" h="185"/>
+    <sprite n="round_button_yellow.png" x="3602" y="0" w="176" h="185"/>
+    <sprite n="round_button_grey.png" x="3778" y="0" w="176" h="185"/>
+    <sprite n="play_button_blue.png" x="0" y="185" w="176" h="185"/>
+    <sprite n="play_button_green.png" x="176" y="185" w="176" h="185"/>
+    <sprite n="play_button_yellow.png" x="352" y="185" w="176" h="185"/>
+    <sprite n="play_button_grey.png" x="528" y="185" w="176" h="185"/>
+    <sprite n="home_button_blue.png" x="704" y="185" w="176" h="185"/>
+    <sprite n="home_button_green.png" x="880" y="185" w="176" h="185"/>
+    <sprite n="home_button_yellow.png" x="1056" y="185" w="176" h="185"/>
+    <sprite n="home_button_grey.png" x="1232" y="185" w="176" h="185"/>
+    <sprite n="back_button_blue.png" x="1408" y="185" w="176" h="185"/>
+    <sprite n="back_button_green.png" x="1584" y="185" w="176" h="185"/>
+    <sprite n="back_button_yellow.png" x="1760" y="185" w="176" h="185"/>
+    <sprite n="back_button_grey.png" x="1936" y="185" w="176" h="185"/>
+    <sprite n="info_button_blue.png" x="2112" y="185" w="176" h="185"/>
+    <sprite n="info_button_green.png" x="2288" y="185" w="176" h="185"/>
+    <sprite n="info_button_yellow.png" x="2464" y="185" w="176" h="185"/>
+    <sprite n="info_button_grey.png" x="2640" y="185" w="176" h="185"/>
+    <sprite n="up_button_blue.png" x="2816" y="185" w="176" h="185"/>
+    <sprite n="up_button_green.png" x="2992" y="185" w="176" h="185"/>
+    <sprite n="up_button_yellow.png" x="3168" y="185" w="176" h="185"/>
+    <sprite n="up_button_grey.png" x="3344" y="185" w="176" h="185"/>
+    <sprite n="user_button_blue.png" x="3520" y="185" w="176" h="185"/>
+    <sprite n="user_button_green.png" x="3696" y="185" w="176" h="185"/>
+    <sprite n="user_button_yellow.png" x="3872" y="185" w="176" h="185"/>
+    <sprite n="user_button_grey.png" x="0" y="370" w="176" h="185"/>
+    <sprite n="down_button_blue.png" x="176" y="370" w="176" h="185"/>
+    <sprite n="down_button_green.png" x="352" y="370" w="176" h="185"/>
+    <sprite n="down_button_yellow.png" x="528" y="370" w="176" h="185"/>
+    <sprite n="down_button_grey.png" x="704" y="370" w="176" h="185"/>
+    <sprite n="group_button_blue.png" x="880" y="370" w="176" h="185"/>
+    <sprite n="group_button_green.png" x="1056" y="370" w="176" h="185"/>
+    <sprite n="group_button_yellow.png" x="1232" y="370" w="176" h="185"/>
+    <sprite n="group_button_grey.png" x="1408" y="370" w="176" h="185"/>
+    <sprite n="menu_button_blue.png" x="1584" y="370" w="176" h="185"/>
+    <sprite n="menu_button_green.png" x="1760" y="370" w="176" h="185"/>
+    <sprite n="menu_button_yellow.png" x="1936" y="370" w="176" h="185"/>
+    <sprite n="menu_button_grey.png" x="2112" y="370" w="176" h="185"/>
+    <sprite n="trash_button_blue.png" x="2288" y="370" w="176" h="185"/>
+    <sprite n="trash_button_green.png" x="2464" y="370" w="176" h="185"/>
+    <sprite n="trash_button_yellow.png" x="2640" y="370" w="176" h="185"/>
+    <sprite n="trash_button_grey.png" x="2816" y="370" w="176" h="185"/>
+    <sprite n="achievements_button_blue.png" x="2992" y="370" w="176" h="185"/>
+    <sprite n="achievements_button_green.png" x="3168" y="370" w="176" h="185"/>
+    <sprite n="achievements_button_yellow.png" x="3344" y="370" w="176" h="185"/>
+    <sprite n="achievements_button_grey.png" x="3520" y="370" w="176" h="185"/>
+    <sprite n="shop_button_blue.png" x="3696" y="370" w="176" h="185"/>
+    <sprite n="shop_button_green.png" x="3872" y="370" w="176" h="185"/>
+    <sprite n="shop_button_yellow.png" x="0" y="555" w="176" h="185"/>
+    <sprite n="shop_button_grey.png" x="176" y="555" w="176" h="185"/>
+    <sprite n="pause_button_blue.png" x="352" y="555" w="176" h="186"/>
+    <sprite n="pause_button_green.png" x="528" y="555" w="176" h="186"/>
+    <sprite n="pause_button_yellow.png" x="704" y="555" w="176" h="186"/>
+    <sprite n="pause_button_grey.png" x="880" y="555" w="176" h="186"/>
+    <sprite n="grid_button_blue.png" x="1056" y="555" w="176" h="186"/>
+    <sprite n="grid_button_green.png" x="1232" y="555" w="176" h="186"/>
+    <sprite n="grid_button_yellow.png" x="1408" y="555" w="176" h="186"/>
+    <sprite n="grid_button_grey.png" x="1584" y="555" w="176" h="186"/>
+    <sprite n="forward_button_blue.png" x="1760" y="555" w="176" h="186"/>
+    <sprite n="forward_button_green.png" x="1936" y="555" w="176" h="186"/>
+    <sprite n="forward_button_yellow.png" x="2112" y="555" w="176" h="186"/>
+    <sprite n="forward_button_grey.png" x="2288" y="555" w="176" h="186"/>
+    <sprite n="plus_button_blue.png" x="2464" y="555" w="176" h="186"/>
+    <sprite n="plus_button_green.png" x="2640" y="555" w="176" h="186"/>
+    <sprite n="plus_button_yellow.png" x="2816" y="555" w="176" h="186"/>
+    <sprite n="plus_button_grey.png" x="2992" y="555" w="176" h="186"/>
+    <sprite n="backward_button_blue.png" x="3168" y="555" w="176" h="186"/>
+    <sprite n="backward_button_green.png" x="3344" y="555" w="176" h="186"/>
+    <sprite n="backward_button_yellow.png" x="3520" y="555" w="176" h="186"/>
+    <sprite n="backward_button_grey.png" x="3696" y="555" w="176" h="186"/>
+    <sprite n="minus_button_blue.png" x="3872" y="555" w="176" h="186"/>
+    <sprite n="minus_button_green.png" x="0" y="741" w="176" h="186"/>
+    <sprite n="minus_button_yellow.png" x="176" y="741" w="176" h="186"/>
+    <sprite n="minus_button_grey.png" x="352" y="741" w="176" h="186"/>
+    <sprite n="arrow_up_button_blue.png" x="528" y="741" w="176" h="186"/>
+    <sprite n="arrow_up_button_green.png" x="704" y="741" w="176" h="186"/>
+    <sprite n="arrow_up_button_yellow.png" x="880" y="741" w="176" h="186"/>
+    <sprite n="arrow_up_button_grey.png" x="1056" y="741" w="176" h="186"/>
+    <sprite n="update_button_blue.png" x="1232" y="741" w="176" h="186"/>
+    <sprite n="update_button_green.png" x="1408" y="741" w="176" h="186"/>
+    <sprite n="update_button_yellow.png" x="1584" y="741" w="176" h="186"/>
+    <sprite n="update_button_grey.png" x="1760" y="741" w="176" h="186"/>
+    <sprite n="arrow_down_button_blue.png" x="1936" y="741" w="176" h="186"/>
+    <sprite n="arrow_down_button_green.png" x="2112" y="741" w="176" h="186"/>
+    <sprite n="arrow_down_button_yellow.png" x="2288" y="741" w="176" h="186"/>
+    <sprite n="arrow_down_button_grey.png" x="2464" y="741" w="176" h="186"/>
+    <sprite n="config_button_blue.png" x="2640" y="741" w="176" h="186"/>
+    <sprite n="config_button_green.png" x="2816" y="741" w="176" h="186"/>
+    <sprite n="config_button_yellow.png" x="2992" y="741" w="176" h="186"/>
+    <sprite n="config_button_grey.png" x="3168" y="741" w="176" h="186"/>
+    <sprite n="button_locked.png" x="3344" y="741" w="176" h="185"/>
+</TextureAtlas>

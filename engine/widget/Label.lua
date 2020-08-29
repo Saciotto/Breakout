@@ -46,7 +46,7 @@ function Label:drawLimitedXY(coloredText)
     end
     
     --love.graphics.setScissor(self.x, self.y, self.width, self.height)
-    love.graphics.printf(coloredText, self.x, y, self.width, self.alignX)
+    love.graphics.draw(drawableText, self.x, y)
     --love.graphics.setScissor()
 end
 
@@ -62,6 +62,8 @@ function Label:draw()
     if self.font == nil then
         return
     end
+
+    love.graphics.setColor(Colors.WHITE)
 
     local coloredText = {
         self.color,
