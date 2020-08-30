@@ -1,11 +1,5 @@
 --- Love2d entry point
 
-
-
-function SetScreen(NewScreen)
-    screen = NewScreen:new()
-end
-
 function love.load()
     require("engine.init")
     require("game.init")
@@ -19,33 +13,34 @@ function love.load()
     Sprites = AssetsManager.loadSprites("assets/images/Tiles.xml")
     Animations = AssetsManager.loadAnimations("assets/images/Animations.xml", Sprites)
 
+    -- Setup defaults
     Label.setDefaultFont(Fonts.DEJAVU, 20)
     Button.setDefualtSprites(Buttons.round_button_blue, Buttons.round_button_blue)
 
-    -- Set first screen
-    SetScreen(SplashScreen)
+    -- Starts the game
+    Game.load(SplashScreen)
 end
 
 function love.update(dt)
-    screen:update(dt)
+    Game.update(dt)
 end
 
 function love.draw()
-    screen:draw()
+    Game.draw()
 end
 
 function love.keypressed(key, unicode)
-    screen:keyPressed(key, unicode)
+    Game.screen:keyPressed(key, unicode)
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
-    screen:invokeMouseMoved(x, y, dx, dy)
+    Game.screen:invokeMouseMoved(x, y, dx, dy)
 end
 
 function love.mousepressed(x, y, button)
-    screen:invokeMousePressed(x, y, button)
+    Game.screen:invokeMousePressed(x, y, button)
 end
 
 function love.mousereleased(x, y, button)
-    screen:invokeMouseReleased(x, y, button)
+    Game.screen:invokeMouseReleased(x, y, button)
 end

@@ -100,7 +100,7 @@ end
 
 function GameScreen:update(dt)
     self.controller:update(dt)
-    self.fps.text = "FPS: " .. string.format("%.0f", FramesCounter:getFPS(dt))
+    self.fps.text = "FPS: " .. string.format("%.0f", Game.fps)
 end
 
 function GameScreen:mouseMoved(x, y, dx, dy)

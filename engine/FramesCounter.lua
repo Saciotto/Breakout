@@ -5,19 +5,19 @@ local FramesCounter = {
     fps = 0.0
 }
 
-function FramesCounter:getFPS(dt)
-    self.frames = self.frames + 1
-    self.time = self.time + dt
-    if self.time > self.next then
-        self.fps =  self.frames / self.time
-        self.time = 0.0
-        self.frames = 0.0
-        self.next = 0.25
+function FramesCounter.getFPS(dt)
+    FramesCounter.frames = FramesCounter.frames + 1
+    FramesCounter.time = FramesCounter.time + dt
+    if FramesCounter.time > FramesCounter.next then
+        FramesCounter.fps =  FramesCounter.frames / FramesCounter.time
+        FramesCounter.time = 0.0
+        FramesCounter.frames = 0.0
+        FramesCounter.next = 0.25
     end
-    if self.fps == 0 then
-        self.fps = 1 / dt
+    if FramesCounter.fps == 0 then
+        FramesCounter.fps = 1 / dt
     end
-    return self.fps
+    return FramesCounter.fps
 end
 
 return FramesCounter

@@ -10,7 +10,7 @@ end
 
 local function loadStage(button)
     GameScreen.stage = button.stage
-    SetScreen(GameScreen)
+    Game.setScreen(GameScreen)
 end
 
 local function createStageButton(stage, enabled)

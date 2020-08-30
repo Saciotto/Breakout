@@ -1,16 +1,17 @@
 local Screen = {}
 
-function Screen:new(o, width, height)
-    local o = o or {}
-    setmetatable(o, self)
+function Screen:new(config)
+    local screen = {}
+    setmetatable(screen, self)
     self.__index = self
-    o.background = love.graphics.newImage("assets/images/GreenCardboard.png")
-    o.width = width or DefaultViewport.WIDTH
-    o.height = height or DefaultViewport.HEIGHT
-    o.camera = Camera:new(o.width, o.height, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
-    o.entities = {}
-    o.widgets = {}
-    return o
+    screen.config = config or {}
+    screen.background = love.graphics.newImage("assets/images/GreenCardboard.png")
+    screen.width = DefaultViewport.WIDTH
+    screen.height = DefaultViewport.HEIGHT
+    screen.camera = Camera:new(screen.width, screen.height, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
+    screen.entities = {}
+    screen.widgets = {}
+    return screen
 end
 
 function Screen:update(dt)
@@ -25,12 +26,16 @@ function Screen.drawSpriteBatch(spriteBatch)
     end
 end
 
-function Screen:draw()
-    self.camera:update()
-    Renderer.beginDrawing(self.camera)
+function Screen:drawSprites()
     Renderer.drawImage(self.background, 0, 0, self.width, self.height)
     self.drawSpriteBatch(self.entities)
     self.drawSpriteBatch(self.widgets)
+end
+
+function Screen:draw()
+    self.camera:update()
+    Renderer.beginDrawing(self.camera)
+    self:drawSprites()
     Renderer.endDrawing(self.camera)
 end
 

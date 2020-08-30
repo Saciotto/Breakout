@@ -92,7 +92,7 @@ local function updateBall(self, screen, dt)
 end
 
 local function checkObjective(self)
-    if #screen.grid.bricks == 0 then
+    if #self.screen.grid.bricks == 0 then
         self.winner = true
         self.gameOver = true
     end
@@ -117,7 +117,7 @@ end
 function Controller:mousePressed(x, y, button)
     self.paused = false
     if self.winner or self.gameOver then
-        SetScreen(StageSelect)
+        Game.setScreen(StageSelect)
     end
 end
 

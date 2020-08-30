@@ -12,15 +12,11 @@ function SplashScreen:new()
 end
 
 function SplashScreen:keyPressed(key, unicode)
-    SetScreen(StageSelect)
+    Game.setScreen(StageSelect)
 end
 
 function SplashScreen.mousePressed(x, y, button)
-    SetScreen(StageSelect)
-end
-
-function SplashScreen:draw()
-    Screen.draw(self)
+    Game.setScreen(StageSelect)
 end
 
 return SplashScreen
