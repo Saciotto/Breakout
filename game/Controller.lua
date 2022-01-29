@@ -3,28 +3,53 @@ local Controller = {
     winner = false,
     loser = false,
     paused = true,
-    score = 0
+    score = 0,
 }
 
-local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
-    local dx = (x1 + w1 * 0.5) - (x2 + w2 * 0.5)
-    local dy = (y1 + h1 * 0.5) - (y2 + h2 * 0.5)
-    if math.abs(dx) <= w2 and math.abs(dy) <= h2 then
-        wy = w2 * dy
-        hx = h2 * dx
-        if wy > hx then
-            if wy > -hx then
-                return true, "top"
-            else
-                return true, "right"
-            end
+local function checkCollisionSide(ball, x1, y1, w1, h1, x2, y2, w2, h2)
+    local tx, ty
+    local dx = ball.dx
+    local dy = ball.dy
+
+    if dy > 0 and dx > 0 then
+        tx = (x1 + w1 - x2) / dx
+        ty = (y1 + h1 - y2) / dy
+        if ty <= tx then 
+            return "top"
         else
-            if wy > -hx then
-                return true, "left"
-            else
-                return true, "bottom"
-            end
+            return "left"
         end
+    elseif dy > 0 and dx < 0 then
+        tx = (x1 - x2 - w2) / dx
+        ty = (y1 + h1 - y2) / dy
+        if ty <= tx then 
+            return "top"
+        else
+            return "right"
+        end
+    elseif dy < 0 and dx > 0 then
+        tx = (x1 + w1 - x2) / dx
+        ty = (y1 - y2 - h2) / dy
+        if ty <= tx then 
+            return "bottom"
+        else
+            return "left"
+        end
+    elseif dy < 0 and dx < 0 then
+        tx = (x1 - x2 - w2) / dx
+        ty = (y1 - y2 - h2) / dy
+        if ty <= tx then 
+            return "bottom"
+        else
+            return "right"
+        end
+    end
+    return "bottom"
+end
+
+local function checkCollision(ball, x1, y1, w1, h1, x2, y2, w2, h2)
+    if (x1 < x2 + w2) and (x1 + w1 > x2) and (y1 < y2 + h2) and (y1 + h1 > y2) then
+        return true, checkCollisionSide(ball, x1, y1, w1, h1, x2, y2, w2, h2)
     end
     return false
 end
@@ -33,8 +58,9 @@ local function checkCollisionWithPad(screen)
     local bx, by, bw, bh = screen.ball:getViewport()
     local px, py, pw, ph = screen.pad:getViewport()
 
-    local ret, side = checkCollision(bx, by, bw, bh, px, py, pw, ph)
+    local ret, side = checkCollision(screen.ball, bx, by, bw, bh, px, py, pw, ph)
     if ret then
+        if side == "top" then side = "bottom" end
         if side == "bottom" then
             screen.ball.y = screen.pad.y - screen.ball.height
             local cos = ((screen.ball.x + screen.ball.width / 2) - screen.pad.x) / screen.pad.width
@@ -48,19 +74,36 @@ local function checkCollisionWithPad(screen)
     end
 end
 
+function ballHitsBrick(ball, brick, side)
+    if side == "bottom" then
+        ball.y = brick.y + brick.height
+        ball.dy = math.abs(ball.dy)
+    elseif side == "top" then
+        ball.y = brick.y - ball.height 
+        ball.dy = -1 * math.abs(ball.dy)
+    elseif side == "left" then
+        ball.x = brick.x - ball.width 
+        ball.dx = -1 * math.abs(ball.dx)
+    elseif side == "right" then
+        ball.x = brick.x + brick.width
+        ball.dx = math.abs(ball.dx)
+    end
+end
+
 local function checkCollisionWithBricks(self, screen, bricks)
     local bx, by, bw, bh = screen.ball:getViewport()
 
     for i = #bricks, 1, -1 do
         local brx, bry, brw, brh = bricks[i]:getViewport()
-        local ret, side = checkCollision(bx, by, bw, bh, brx, bry, brw, brh)
+        local ret, side = checkCollision(screen.ball, bx, by, bw, bh, brx, bry, brw, brh)
         if ret then
-            screen.ball:hit(side)
+            ballHitsBrick(screen.ball, bricks[i], side)
             bricks[i]:hit()
             if bricks[i].isBroken then
                 self.score = self.score + bricks[i].value
                 screen.grid:destroyBrick(i)
             end
+            break
         end
     end
 end
