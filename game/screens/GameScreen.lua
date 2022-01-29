@@ -91,16 +91,22 @@ function GameScreen:load()
         self.ball,
         self.grid
     }
-    self.fps = Label:new("", {1,1,1})
-    self.fps:setFont(Fonts.DEJAVU, 20)
+    
+    self.stageLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 0, 0, Constants.SCREEN_WIDTH, 0, "left", "top")
+    self.scoreLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 0, 0, Constants.SCREEN_WIDTH, 0, "center", "top")
+    self.fpsLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 0, 0, Constants.SCREEN_WIDTH, 0, "right", "top")
     self.widgets = {
-        self.fps
+        self.stageLabel,
+        self.scoreLabel,
+        self.fpsLabel
     }
 end
 
 function GameScreen:update(dt)
     self.controller:update(dt)
-    self.fps.text = "FPS: " .. string.format("%.0f", Game.fps)
+    self.fpsLabel.text = "FPS: " .. string.format("%.0f", Game.fps)
+    self.scoreLabel.text = "SCORE: " .. string.format("%.0f", self.controller.score)
+    self.stageLabel.text = "STAGE: " .. string.format("%.0f", self.stage)
 end
 
 function GameScreen:mouseMoved(x, y, dx, dy)

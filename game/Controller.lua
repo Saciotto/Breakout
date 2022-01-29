@@ -2,7 +2,8 @@ local Controller = {
     gameOver = false,
     winner = false,
     loser = false,
-    paused = true
+    paused = true,
+    score = 0
 }
 
 local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
@@ -50,7 +51,7 @@ local function checkCollisionWithPad(screen)
     end
 end
 
-local function checkCollisionWithBricks(screen, bricks)
+local function checkCollisionWithBricks(self, screen, bricks)
     local bx, by, bw, bh = screen.ball:getViewport()
 
     for i = #bricks, 1, -1 do
@@ -60,6 +61,7 @@ local function checkCollisionWithBricks(screen, bricks)
             screen.ball:hit(side)
             bricks[i]:hit()
             if bricks[i].isBroken then
+                self.score = self.score + bricks[i].value
                 screen.grid:destroyBrick(i)
             end
         end
@@ -70,8 +72,8 @@ local function updateBall(self, screen, dt)
     screen.ball:update(dt)
 
     checkCollisionWithPad(screen)
-    checkCollisionWithBricks(screen, screen.grid.bricks)
-    checkCollisionWithBricks(screen, screen.grid.indestructibleBricks)
+    checkCollisionWithBricks(self, screen, screen.grid.bricks)
+    checkCollisionWithBricks(self, screen, screen.grid.indestructibleBricks)
 
     if screen.ball.x < 0 then
         screen.ball.x = 0

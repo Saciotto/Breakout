@@ -16,8 +16,8 @@ function Label:new(text, color, font, size, x, y, width, height, alignX, alignY)
     if label.font ~= nil then
         label:setFont(label.font, label.size)
     end
-    self.alignX = alignX or "left"
-    self.alignY = alignY or "middle"
+    label.alignX = alignX or "left"
+    label.alignY = alignY or "middle"
     return label
 end
 

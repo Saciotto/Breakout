@@ -14,6 +14,7 @@ function Brick:new(x, y, color, len)
     o.indestrutible = false
     o.isBroken = false
     o.width = o.len * Constants.BRICK_WIDTH
+    o.value = o.len
     return o
 end
 
