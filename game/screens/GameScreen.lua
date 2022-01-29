@@ -85,7 +85,7 @@ function GameScreen:load()
     self.stage = GameScreen.stage
     self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
     self.pad = Pad:new()
-    self.background = love.graphics.newImage("assets/images/SunnyDay.png")
+    self.background = Graphics.newImage("assets/images/SunnyDay.png")
     self.entities = {
         self.pad,
         self.ball,

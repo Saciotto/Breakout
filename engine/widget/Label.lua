@@ -23,7 +23,7 @@ end
 
 function Label:setFont(font, size)
     size = size or Label.defualtSize
-    self.font = love.graphics.newFont(font, size)
+    self.font = Graphics.newFont(font, size)
 end
 
 function Label:setAlign(alignX, alignY)
@@ -33,7 +33,7 @@ end
 
 function Label:drawLimitedXY(coloredText)
 
-    local drawableText = love.graphics.newText(self.font)
+    local drawableText = Graphics.newText(self.font)
     drawableText:setf(coloredText, self.width, self.alignX)
 
     local y
@@ -45,17 +45,17 @@ function Label:drawLimitedXY(coloredText)
         y = self.y
     end
     
-    --love.graphics.setScissor(self.x, self.y, self.width, self.height)
-    love.graphics.draw(drawableText, self.x, y)
-    --love.graphics.setScissor()
+    Graphics.setScissor(self.x, self.y, self.width, self.height)
+    Graphics.draw(drawableText, self.x, y)
+    Graphics.setScissor()
 end
 
 function Label:drawLimitedX(coloredText)
-    love.graphics.printf(coloredText, self.x, self.y, self.width, self.alignX)
+    Graphics.printf(coloredText, self.x, self.y, self.width, self.alignX)
 end
 
 function Label:drawUnlimited(coloredText)
-    love.graphics.print(coloredText, self.x, self.y)
+    Graphics.print(coloredText, self.x, self.y)
 end
 
 function Label:draw()
@@ -63,13 +63,13 @@ function Label:draw()
         return
     end
 
-    love.graphics.setColor(Colors.WHITE)
+    Graphics.setColor(Colors.WHITE)
 
     local coloredText = {
         self.color,
         self.text
     }
-    love.graphics.setFont(self.font)
+    Graphics.setFont(self.font)
 
     if self.width and self.width > 0 and self.height and self.height > 0 then
         self:drawLimitedXY(coloredText)

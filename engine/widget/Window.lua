@@ -9,11 +9,11 @@ end
 
 function Window:draw()
     local border = 10
-    love.graphics.setColor(Colors.YELLOW_DARK)
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height, 10, 10)
-    love.graphics.setColor( Colors.YELLOW_LIGHT)
-    love.graphics.rectangle("fill", self.x + border, self.y + border, self.width - 2 *border, self.height - 2* border, 10, 10)
-    love.graphics.setColor(Colors.WHITE)
+    Graphics.setColor(Colors.YELLOW_DARK)
+    Graphics.rectangle("fill", self.x, self.y, self.width, self.height, 10, 10)
+    Graphics.setColor( Colors.YELLOW_LIGHT)
+    Graphics.rectangle("fill", self.x + border, self.y + border, self.width - 2 *border, self.height - 2* border, 10, 10)
+    Graphics.setColor(Colors.WHITE)
 end
 
 return Window

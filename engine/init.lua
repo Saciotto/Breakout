@@ -1,3 +1,4 @@
+Graphics = require("engine.Graphics")
 AssetsManager = require("engine.AssetsManager")
 Camera = require("engine.Camera")
 Colors = require("engine.Colors")

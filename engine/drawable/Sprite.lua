@@ -4,7 +4,7 @@ function Sprite:new(x, y, width, height, image)
     local sprite = Drawable:new()
     setmetatable(sprite, self)
     self.__index = self
-    sprite.quad = love.graphics.newQuad(x, y, width, height, image:getDimensions())
+    sprite.quad = Graphics.newQuad(x, y, width, height, image:getDimensions())
     sprite.image = image
     return sprite
 end

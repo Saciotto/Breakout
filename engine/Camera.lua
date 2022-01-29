@@ -19,7 +19,7 @@ function Camera:new(width, height, scaleMethod)
 end
 
 function Camera:update()
-    local windowWidth, windowHeight = love.graphics.getDimensions()
+    local windowWidth, windowHeight = Graphics.getDimensions()
 
     if self.scaleMethod == "FULL_SCREEN" then
         self.scaleX = windowWidth / self.sceneWidth
@@ -38,19 +38,19 @@ function Camera:update()
 end
 
 function Camera:transform(x, y)
-    newX = (x - self.offsetX) / self.scaleX
-    newY = (y - self.offsetY) / self.scaleY
+    local newX = (x - self.offsetX) / self.scaleX
+    local newY = (y - self.offsetY) / self.scaleY
     return newX, newY
 end
 
 function Camera:set()
-    love.graphics.push()
-    love.graphics.translate(self.offsetX, self.offsetY)
-    love.graphics.scale(self.scaleX, self.scaleY)
+    Graphics.push()
+    Graphics.translate(self.offsetX, self.offsetY)
+    Graphics.scale(self.scaleX, self.scaleY)
 end
 
 function Camera:unset()
-    love.graphics.pop()
+    Graphics.pop()
 end
 
 return Camera

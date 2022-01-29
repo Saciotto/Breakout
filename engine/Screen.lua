@@ -5,7 +5,7 @@ function Screen:new(config)
     setmetatable(screen, self)
     self.__index = self
     screen.config = config or {}
-    screen.background = love.graphics.newImage("assets/images/GreenCardboard.png")
+    screen.background = Graphics.newImage("assets/images/GreenCardboard.png")
     screen.width = DefaultViewport.WIDTH
     screen.height = DefaultViewport.HEIGHT
     screen.camera = Camera:new(screen.width, screen.height, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")

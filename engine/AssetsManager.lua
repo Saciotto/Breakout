@@ -13,7 +13,7 @@ function AssetsManager.loadSprites(atlas)
     local parser = xml2lua.parser(handler)
     parser:parse(xml)
     local imagePath = atlas:match(".+/") .. handler.root.TextureAtlas._attr.imagePath
-    local image = love.graphics.newImage(imagePath)
+    local image = Graphics.newImage(imagePath)
     for i, xmlSprite in pairs(handler.root.TextureAtlas.sprite) do
         local name = xmlSprite._attr.n and xmlSprite._attr.n:match("(.+)%..+")
         if (name ~= nil) then
