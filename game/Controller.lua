@@ -7,13 +7,11 @@ local Controller = {
 }
 
 local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
-    w = 0.5 * (w1 + w2)
-    h = 0.5 * (h1 + h2)
-    dx = (x1 + w1 / 2) - (x2 + w2 / 2)
-    dy = (y1 + h1 / 2) - (y2 + h2 / 2)
-    if math.abs(dx) <= w and math.abs(dy) <= h then
-        wy = w * dy
-        hx = h * dx
+    local dx = (x1 + w1 * 0.5) - (x2 + w2 * 0.5)
+    local dy = (y1 + h1 * 0.5) - (y2 + h2 * 0.5)
+    if math.abs(dx) <= w2 and math.abs(dy) <= h2 then
+        wy = w2 * dy
+        hx = h2 * dx
         if wy > hx then
             if wy > -hx then
                 return true, "top"
@@ -28,7 +26,6 @@ local function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
             end
         end
     end
-
     return false
 end
 
@@ -70,7 +67,7 @@ end
 
 local function updateBall(self, screen, dt)
     screen.ball:update(dt)
-
+    
     checkCollisionWithPad(screen)
     checkCollisionWithBricks(self, screen, screen.grid.bricks)
     checkCollisionWithBricks(self, screen, screen.grid.indestructibleBricks)
