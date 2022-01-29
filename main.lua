@@ -1,5 +1,9 @@
---- Love2d entry point
+--- Debuger
+if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
+    require("lldebugger").start()
+end
 
+--- Love2d entry point
 function love.load()
     require("engine.init")
     require("game.init")
