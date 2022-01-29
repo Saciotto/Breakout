@@ -3,6 +3,23 @@
 local GameScreen = Screen:new()
 GameScreen.stage = 1
 
+local function getBackground(stage)
+    local backgroundId = stage % 6
+    if backgroundId == 1 then
+        return Graphics.newImage("assets/images/SunnyDay.png")
+    elseif backgroundId == 2 then
+        return Graphics.newImage("assets/images/BlueMoon.png")
+    elseif backgroundId == 3 then
+        return Graphics.newImage("assets/images/CitySkyline.png")
+    elseif backgroundId == 4 then
+        return Graphics.newImage("assets/images/Foggy.png")
+    elseif backgroundId == 5 then
+        return Graphics.newImage("assets/images/Graveyard.png")
+    elseif backgroundId == 0 then
+        return Graphics.newImage("assets/images/SnowyMountains.png")
+    end
+end
+
 local function getColor(c)
     if c == 'b' or c == 'B' then
         return "blue"
@@ -85,7 +102,7 @@ function GameScreen:load()
     self.stage = GameScreen.stage
     self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
     self.pad = Pad:new()
-    self.background = Graphics.newImage("assets/images/SunnyDay.png")
+    self.background = getBackground(self.stage)
     self.entities = {
         self.pad,
         self.ball,
