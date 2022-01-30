@@ -4,6 +4,14 @@ local Controller = {
     ballSpeed = 1
 }
 
+function Controller:new(screen)
+    local controller = {}
+    setmetatable(controller, self)
+    self.__index = self
+    controller.screen = screen
+    return controller
+end
+
 local function checkCollisionSide(ball, x1, y1, w1, h1, x2, y2, w2, h2)
     local tx, ty
     local dx = ball.dx
@@ -89,7 +97,7 @@ local function ballHitsBrick(ball, brick, side)
     ball.hits = ball.hits + 1
 end
 
-function Controller:updateBallSpeed(ball)
+local function updateBallSpeed(ball)
     local ballSpeed
     if ball.hits > 20 then 
         ballSpeed = 2
@@ -101,10 +109,8 @@ function Controller:updateBallSpeed(ball)
     ball:setVelocity(Constants.BALL_VELOCITY * ballSpeed)
 end
 
-function Controller:checkCollisionWithBricks(bricks)
-    local ball = self.screen.ball
+function Controller:checkCollisionWithBricks(ball, bricks)
     local bx, by, bw, bh = ball:getViewport()
-
     for i = #bricks, 1, -1 do
         local brx, bry, brw, brh = bricks[i]:getViewport()
         local ret, side = checkCollision(ball, bx, by, bw, bh, brx, bry, brw, brh)
@@ -120,15 +126,14 @@ function Controller:checkCollisionWithBricks(bricks)
     end
 end
 
-function Controller:checkCollisions()
-    local ball = self.screen.ball
+function Controller:checkBallCollisions(ball)
     local bricks = self.screen.grid.bricks
     local metalBricks = self.screen.grid.indestructibleBricks
     local pad = self.screen.pad
 
     checkCollisionWithPad(ball, pad)
-    self:checkCollisionWithBricks(bricks)
-    self:checkCollisionWithBricks(metalBricks)
+    self:checkCollisionWithBricks(ball, bricks)
+    self:checkCollisionWithBricks(ball, metalBricks)
 
     if ball.x < 0 then
         ball.x = 0
@@ -150,6 +155,12 @@ function Controller:checkCollisions()
             Game.setScreen(GameOverScreen)
         end
         GameData.lives = GameData.lives - 1
+    end
+end
+
+function Controller:checkCollisions()
+    for k, ball in pairs(self.screen.balls.children) do
+        self:checkBallCollisions(ball)
     end
 end
 
@@ -177,21 +188,13 @@ function Controller:updateEntities(dt)
 end
 
 function Controller:setBallToStartPostion()
-
-    local ball = self.screen.ball
-    ball.hits = 0
-    ball.x = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
-    ball.y = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
-    ball:setAngle(-math.pi / 4)
-    self:updateBallSpeed(ball)
-end
-
-function Controller:new(screen)
-    local controller = {}
-    setmetatable(controller, self)
-    self.__index = self
-    controller.screen = screen
-    return controller
+    for k, ball in pairs(self.screen.balls.children) do
+        ball.hits = 0
+        ball.x = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
+        ball.y = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
+        ball:setAngle(-math.pi / 4)
+        updateBallSpeed(ball)
+    end
 end
 
 function Controller:update(dt)
@@ -199,9 +202,16 @@ function Controller:update(dt)
         self:updateEntities(dt)
         self:checkCollisions()
         self:checkObjective()
-        self:updateBallSpeed(self.screen.ball)
     end
     self.screen.camera:update()
+end
+
+function Controller:start()
+    local ballX = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
+    local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
+    local ballAngle = -math.pi / 4
+    local ball = Ball:new(ballX, ballY, Constants.BALL_VELOCITY, ballAngle)
+    self.screen.balls:addChild(ball)
 end
 
 return Controller

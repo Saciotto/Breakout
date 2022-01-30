@@ -31,9 +31,6 @@ end
 function GameScreen:load()
     self.controller = Controller:new(self)
 
-    local ballX = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
-    local ballY = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
-
     self.stage = GameScreen.stage
     if GameData.unlockedStage < self.stage then
         GameData.unlockedStage = self.stage
@@ -42,12 +39,12 @@ function GameScreen:load()
     self.grid = BricksGrid:new()
     MapManager.importMap(self.grid, self.stage)
 
-    self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
+    self.balls = Entity:new()
     self.pad = Pad:new()
     self.background = getBackground(self.stage)
     self.entities = {
         self.pad,
-        self.ball,
+        self.balls,
         self.grid
     }
     
@@ -67,6 +64,8 @@ function GameScreen:load()
         self.padInputProcessor,
         self.gameInputProcessor
     }
+    
+    self.controller:start()
 end
 
 function GameScreen:update(dt)

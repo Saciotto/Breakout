@@ -10,6 +10,7 @@ function Entity:new(x, y, width, height, drawable, debugColor)
     entity.height = height or 1
     entity.drawable = drawable or Drawable:new()
     entity.debugColor = debugColor or Colors.WHITE
+    entity.children = {}
     return entity
 end
 
@@ -19,6 +20,9 @@ end
 
 function Entity:update(dt)
     self.drawable:update(dt)
+    for k, child in pairs(self.children) do
+        child:update(dt)
+    end
 end
 
 function Entity:setArea(x, y, width, height)
@@ -30,6 +34,17 @@ end
 
 function Entity:draw()
     self.drawable:draw(self:getViewport())
+    for k, child in pairs(self.children) do
+        child:draw()
+    end
+end
+
+function Entity:addChild(child)
+    table.insert(self.children, child)
+end
+
+function Entity:removeChild(index)
+    table.remove(self.children, index)
 end
 
 return Entity
