@@ -109,20 +109,20 @@ function GameScreen:load()
         self.grid
     }
     
-    self.stageLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 0, 0, Constants.SCREEN_WIDTH, 0, "left", "top")
-    self.scoreLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 0, 0, Constants.SCREEN_WIDTH, 0, "center", "top")
-    self.fpsLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 0, 0, Constants.SCREEN_WIDTH, 0, "right", "top")
+    self.stageLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 10, 0, Constants.SCREEN_WIDTH - 20, 0, "left", "top")
+    self.scoreLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 10, 0, Constants.SCREEN_WIDTH - 20, 0, "center", "top")
+    self.livesLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 10, 0, Constants.SCREEN_WIDTH - 20, 0, "right", "top")
     self.widgets = {
         self.stageLabel,
         self.scoreLabel,
-        self.fpsLabel
+        self.livesLabel
     }
 end
 
 function GameScreen:update(dt)
     self.controller:update(dt)
-    self.fpsLabel.text = "FPS: " .. string.format("%.0f", Game.fps)
-    self.scoreLabel.text = "SCORE: " .. string.format("%.0f", self.controller.score)
+    self.livesLabel.text = "LIVES: " .. string.format("%.0f", GameData.lives)
+    self.scoreLabel.text = "SCORE: " .. string.format("%.0f", GameData.score)
     self.stageLabel.text = "STAGE: " .. string.format("%.0f", self.stage)
 end
 

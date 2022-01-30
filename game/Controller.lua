@@ -6,6 +6,12 @@ local Controller = {
     score = 0,
 }
 
+function Controller:setBallToStartPostion()
+    self.screen.ball.x = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
+    self.screen.ball.y = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
+    self.screen.ball:setVelocity(Constants.BALL_VELOCITY)
+end
+
 local function checkCollisionSide(ball, x1, y1, w1, h1, x2, y2, w2, h2)
     local tx, ty
     local dx = ball.dx
@@ -100,7 +106,7 @@ local function checkCollisionWithBricks(self, screen, bricks)
             ballHitsBrick(screen.ball, bricks[i], side)
             bricks[i]:hit()
             if bricks[i].isBroken then
-                self.score = self.score + bricks[i].value
+                GameData.score = GameData.score  + bricks[i].value
                 screen.grid:destroyBrick(i)
             end
             break
@@ -129,7 +135,13 @@ local function updateBall(self, screen, dt)
     end
     if screen.ball.y > Constants.SCREEN_HEIGHT - screen.ball.height then
         self.loser = true
-        self.gameOver = true
+        if GameData.lives > 1 then
+            self.paused = true
+            self:setBallToStartPostion()
+        else
+            self.gameOver = true
+        end
+        GameData.lives = GameData.lives - 1
     end
 end
 
