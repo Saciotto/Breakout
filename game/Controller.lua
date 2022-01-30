@@ -1,8 +1,7 @@
 local Controller = {
-    gameOver = false,
-    winner = false,
     paused = true,
     score = 0,
+    ballSpeed = 1
 }
 
 local function checkCollisionSide(ball, x1, y1, w1, h1, x2, y2, w2, h2)
@@ -73,7 +72,7 @@ local function checkCollisionWithPad(ball, pad)
     end
 end
 
-function ballHitsBrick(ball, brick, side)
+local function ballHitsBrick(ball, brick, side)
     if side == "bottom" then
         ball.y = brick.y + brick.height
         ball.dy = math.abs(ball.dy)
@@ -87,9 +86,23 @@ function ballHitsBrick(ball, brick, side)
         ball.x = brick.x + brick.width
         ball.dx = math.abs(ball.dx)
     end
+    ball.hits = ball.hits + 1
 end
 
-local function checkCollisionWithBricks(controller, ball, bricks)
+function Controller:updateBallSpeed(ball)
+    local ballSpeed
+    if ball.hits > 20 then 
+        ballSpeed = 2
+    elseif ball.hits > 10 then 
+        ballSpeed = 1.5
+    else
+        ballSpeed = 1
+    end
+    ball:setVelocity(Constants.BALL_VELOCITY * ballSpeed)
+end
+
+function Controller:checkCollisionWithBricks(bricks)
+    local ball = self.screen.ball
     local bx, by, bw, bh = ball:getViewport()
 
     for i = #bricks, 1, -1 do
@@ -100,22 +113,22 @@ local function checkCollisionWithBricks(controller, ball, bricks)
             bricks[i]:hit()
             if bricks[i].isBroken then
                 GameData.score = GameData.score  + bricks[i].value
-                controller.screen.grid:destroyBrick(i)
+                self.screen.grid:destroyBrick(i)
             end
             break
         end
     end
 end
 
-local function checkCollisions(controller)
-    local ball = controller.screen.ball
-    local bricks = controller.screen.grid.bricks
-    local metalBricks = controller.screen.grid.indestructibleBricks
-    local pad = controller.screen.pad
+function Controller:checkCollisions()
+    local ball = self.screen.ball
+    local bricks = self.screen.grid.bricks
+    local metalBricks = self.screen.grid.indestructibleBricks
+    local pad = self.screen.pad
 
     checkCollisionWithPad(ball, pad)
-    checkCollisionWithBricks(controller, ball, bricks)
-    checkCollisionWithBricks(controller, ball, metalBricks)
+    self:checkCollisionWithBricks(bricks)
+    self:checkCollisionWithBricks(metalBricks)
 
     if ball.x < 0 then
         ball.x = 0
@@ -131,42 +144,46 @@ local function checkCollisions(controller)
     end
     if ball.y > Constants.SCREEN_HEIGHT - ball.height then
         if GameData.lives > 1 then
-            controller.paused = true
-            controller:setBallToStartPostion()
+            self.paused = true
+            self:setBallToStartPostion()
         else
-            controller.gameOver = true
             Game.setScreen(GameOverScreen)
         end
         GameData.lives = GameData.lives - 1
     end
 end
 
-local function loadStage(nextStage)
+function Controller:loadStage(nextStage)
     GameScreen.stage = nextStage
     Game.setScreen(GameScreen)
 end
 
-local function checkObjective(self)
-    if #self.screen.grid.bricks == 0 then
-        self.winner = true
+function Controller:checkObjective()
+    local bricks = self.screen.grid.bricks
+    if #bricks == 0 then
         if self.screen.stage < Constants.MAX_STAGES then
-            loadStage(self.screen.stage + 1)
+            self:loadStage(self.screen.stage + 1)
         else
             Game.setScreen(GameOverScreen)
         end
     end
 end
 
-local function updateEntities(dt, entities)
+function Controller:updateEntities(dt)
+    local entities = self.screen.entities
     for k, entity in pairs(entities) do
         entity:update(dt)
     end
 end
 
 function Controller:setBallToStartPostion()
-    self.screen.ball.x = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
-    self.screen.ball.y = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
-    self.screen.ball:setVelocity(Constants.BALL_VELOCITY)
+
+    local ball = self.screen.ball
+    ball.hits = 0
+    ball.x = (Constants.SCREEN_WIDTH - (Constants.PAD_WIDTH * Constants.PAD_LENGTH)) / 2
+    ball.y = Constants.SCREEN_HEIGHT - Constants.PAD_HEIGHT - Constants.PAD_MARGIN - Constants.BALL_MARGIN - Constants.BALL_RADIUS * 2
+    ball:setAngle(-math.pi / 4)
+    self:updateBallSpeed(ball)
 end
 
 function Controller:new(screen)
@@ -178,10 +195,11 @@ function Controller:new(screen)
 end
 
 function Controller:update(dt)
-    if not self.gameOver and not self.paused then
-        updateEntities(dt, self.screen.entities)
-        checkCollisions(self, self.screen, dt)
-        checkObjective(self)
+    if not self.paused then
+        self:updateEntities(dt)
+        self:checkCollisions()
+        self:checkObjective()
+        self:updateBallSpeed(self.screen.ball)
     end
     self.screen.camera:update()
 end
