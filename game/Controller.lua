@@ -140,15 +140,26 @@ local function updateBall(self, screen, dt)
             self:setBallToStartPostion()
         else
             self.gameOver = true
+            Game.setScreen(GameOverScreen)
         end
         GameData.lives = GameData.lives - 1
     end
 end
 
+local function loadStage(nextStage)
+    GameScreen.stage = nextStage
+    Game.setScreen(GameScreen)
+end
+
+
 local function checkObjective(self)
     if #self.screen.grid.bricks == 0 then
         self.winner = true
-        self.gameOver = true
+        if self.screen.stage < Constants.MAX_STAGES then
+            loadStage(self.screen.stage + 1)
+        else
+            Game.setScreen(GameOverScreen)
+        end
     end
 end
 

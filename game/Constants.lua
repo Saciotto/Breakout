@@ -9,6 +9,7 @@ local Constants = {
     PAD_VELOCITY = 900,
     BALL_MARGIN = 15,
     BALL_VELOCITY = 300,
+    MAX_STAGES = 32,
 
     -- Entities
     PAD_WIDTH = 32,

@@ -1,6 +1,8 @@
 local GameData = {
     score = 0,
-    lives = 3
+    maxScore = 0,
+    lives = 3,
+    unlockedStage = 1
 }
 
 return GameData

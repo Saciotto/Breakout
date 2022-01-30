@@ -41,12 +41,12 @@ function StageSelect:load()
     label = Label:new("Level Select", Colors.WHITE, Fonts.CHILANKA, 60, 0, 20, Constants.SCREEN_WIDTH)
     label:setAlign("center", "top")
 
-    self.nextStage = 30
+    self.nextStage = GameData.unlockedStage
     self.widgets = {
         window,
         label
     }
-    for stage = 1, 32, 1 do
+    for stage = 1, Constants.MAX_STAGES, 1 do
         local button = createStageButton(stage, stage <= self.nextStage)
         table.insert(self.widgets, button)
     end

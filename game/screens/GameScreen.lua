@@ -100,6 +100,10 @@ function GameScreen:load()
 
     createBlocks(self)
     self.stage = GameScreen.stage
+    if GameData.unlockedStage < self.stage then
+        GameData.unlockedStage = self.stage
+    end
+
     self.ball = Ball:new(ballX, ballY, BALL_VELOCITY)
     self.pad = Pad:new()
     self.background = getBackground(self.stage)
