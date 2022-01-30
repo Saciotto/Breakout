@@ -121,25 +121,22 @@ function GameScreen:load()
         self.scoreLabel,
         self.livesLabel
     }
+
+    self.padInputProcessor = PadInputProcessor:new(self)
+    self.gameInputProcessor = GameInputProcessor:new(self)
+
+    self.inputProcessors = {
+        self.padInputProcessor,
+        self.gameInputProcessor
+    }
 end
 
 function GameScreen:update(dt)
     self.controller:update(dt)
+    self.padInputProcessor:update(dt)
     self.livesLabel.text = "LIVES: " .. string.format("%.0f", GameData.lives)
     self.scoreLabel.text = "SCORE: " .. string.format("%.0f", GameData.score)
     self.stageLabel.text = "STAGE: " .. string.format("%.0f", self.stage)
-end
-
-function GameScreen:mouseMoved(x, y, dx, dy)
-    self.controller:mouseMoved(x, y, dx, dy)
-end
-
-function GameScreen:mousePressed(x, y, button)
-    self.controller:mousePressed(x, y, button)
-end
-
-function GameScreen:keyPressed(key, unicode)
-    self.controller:keyPressed(key, unicode)
 end
 
 return GameScreen

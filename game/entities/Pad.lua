@@ -23,21 +23,6 @@ function Pad:setLenght(length)
     self.len = length
 end
 
-function Pad:update(dt)
-    if love.keyboard.isDown('a') or love.keyboard.isDown('left') then
-        self.x = self.x - (dt * self.velocity)
-    end
-    if love.keyboard.isDown('d') or love.keyboard.isDown('right') then
-        self.x = self.x + (dt * self.velocity)
-    end
-    if self.x < 0 then
-        self.x = 0 
-    end
-    if self.x > Constants.SCREEN_WIDTH - self.width then
-        self.x = Constants.SCREEN_WIDTH - self.width
-    end
-end
-
 function Pad:draw()
     -- Error
     if self.len < 2 then

@@ -10,6 +10,7 @@ Renderer = require("engine.Renderer")
 Screen = require("engine.Screen")
 Widget = require("engine.Widget")
 Game = require("engine.Game")
+InputProcessor = require("engine.InputProcessor")
 
 require("engine.drawable.init")
 require("engine.widget.init")

@@ -163,27 +163,12 @@ local function checkObjective(self)
     end
 end
 
-function Controller:mouseMoved(x, y, dx, dy)
-    self.screen.pad.x = x - (self.screen.pad:getWidth() / 2)
-end
-
 function Controller:new(screen)
     local o = {}
     setmetatable(o, self)
     self.__index = self
     o.screen = screen
     return o
-end
-
-function Controller:keyPressed(key, unicode)
-    self.paused = false
-end
-
-function Controller:mousePressed(x, y, button)
-    self.paused = false
-    if self.winner or self.gameOver then
-        Game.setScreen(StageSelect)
-    end
 end
 
 function Controller:update(dt)

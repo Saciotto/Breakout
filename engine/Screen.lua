@@ -11,10 +11,14 @@ function Screen:new(config)
     screen.camera = Camera:new(screen.width, screen.height, "FULL_SCREEN_KEEP_ORIGINAL_ASPECT")
     screen.entities = {}
     screen.widgets = {}
+    screen.inputProcessors = {}
     return screen
 end
 
 function Screen:update(dt)
+    for k, inputProcessor in pairs(self.inputProcessors) do 
+        inputProcessor:update(dt)
+    end
     for k, widget in pairs(self.widgets) do
         widget:update(dt)
     end
@@ -40,6 +44,9 @@ function Screen:draw()
 end
 
 function Screen:keyPressed(key, unicode)
+    for k, inputProcessor in pairs(self.inputProcessors) do 
+        inputProcessor:keyPressed(key, unicode)
+    end
     for k, widget in pairs(self.widgets) do
         widget:keyPressed(key, unicode)
     end
@@ -51,6 +58,9 @@ function Screen:invokeMouseMoved(x, y, dx, dy)
 end
 
 function Screen:mouseMoved(x, y, dx, dy)
+    for k, inputProcessor in pairs(self.inputProcessors) do 
+        inputProcessor:mouseMoved(x, y, dx, dy)
+    end
     for k, widget in pairs(self.widgets) do
         widget:mouseMoved(x, y, dx, dy)
     end
@@ -62,6 +72,9 @@ function Screen:invokeMousePressed(x, y, dx, dy)
 end
 
 function Screen:mousePressed(x, y, button)
+    for k, inputProcessor in pairs(self.inputProcessors) do 
+        inputProcessor:mousePressed(x, y, button)
+    end
     for k, widget in pairs(self.widgets) do
         widget:mousePressed(x, y, button)
     end
@@ -73,6 +86,9 @@ function Screen:invokeMouseReleased(x, y, dx, dy)
 end
 
 function Screen:mouseReleased(x, y, button)
+    for k, inputProcessor in pairs(self.inputProcessors) do 
+        inputProcessor:mouseReleased(x, y, button)
+    end
     for k, widget in pairs(self.widgets) do
         widget:mouseReleased(x, y, button)
     end
