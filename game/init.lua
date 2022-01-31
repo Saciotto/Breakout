@@ -1,8 +1,9 @@
-GameData = require("game.GameData")
 Constants = require("game.Constants")
+GameData = require("game.GameData")
 Fonts = require("game.Fonts")
 Controller = require("game.Controller")
 MapManager = require("game.MapManager")
+BallController = require("game.BallController")
 
 require("game.entities.init")
 require("game.screens.init")
