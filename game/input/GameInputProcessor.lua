@@ -18,9 +18,6 @@ end
 function GameInputProcessor:mousePressed(x, y, button)
     local game = self.screen.controller
     game.paused = false
-    if game.winner or game.gameOver then
-        Game.setScreen(StageSelect)
-    end
 end
 
 return GameInputProcessor

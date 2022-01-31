@@ -43,8 +43,8 @@ function Entity:addChild(child)
     table.insert(self.children, child)
 end
 
-function Entity:removeChild(index)
-    table.remove(self.children, index)
+function Entity:removeChild(idx)
+    table.remove(self.children, idx)
 end
 
 return Entity

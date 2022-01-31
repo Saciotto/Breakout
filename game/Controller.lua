@@ -126,6 +126,17 @@ function Controller:checkCollisionWithBricks(ball, bricks)
     end
 end
 
+function Controller:gameOver()
+    if GameData.lives > 1 then
+        self.paused = true
+        self:setBallToStartPostion()
+        GameData.lives = GameData.lives - 1
+        self:start()
+    else
+        Game.setScreen(GameOverScreen)
+    end
+end
+
 function Controller:checkBallCollisions(ball)
     local bricks = self.screen.grid.bricks
     local metalBricks = self.screen.grid.indestructibleBricks
@@ -147,20 +158,26 @@ function Controller:checkBallCollisions(ball)
         ball.y = 0
         ball:hit("top")
     end
-    if ball.y > Constants.SCREEN_HEIGHT - ball.height then
-        if GameData.lives > 1 then
-            self.paused = true
-            self:setBallToStartPostion()
-        else
-            Game.setScreen(GameOverScreen)
-        end
-        GameData.lives = GameData.lives - 1
+    if ball.y > Constants.SCREEN_HEIGHT then
+        return false
     end
+    return true
 end
 
 function Controller:checkCollisions()
+    local ballsOut = {}
     for k, ball in pairs(self.screen.balls.children) do
-        self:checkBallCollisions(ball)
+        local live = self:checkBallCollisions(ball)
+        if not live then
+            table.insert(ballsOut, k)
+        end
+    end
+    for i, ball in pairs(ballsOut) do
+        self.screen.balls:removeChild(ball)
+    end
+
+    if #self.screen.balls.children == 0 then
+        self:gameOver()
     end
 end
 

@@ -47,6 +47,7 @@ function Camera:set()
     Graphics.push()
     Graphics.translate(self.offsetX, self.offsetY)
     Graphics.scale(self.scaleX, self.scaleY)
+    Graphics.setViewportScissor(0, 0, self.sceneWidth, self.sceneHeight)
 end
 
 function Camera:unset()

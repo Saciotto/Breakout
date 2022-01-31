@@ -2,7 +2,11 @@ local Graphics = {
     dx = 0,
     dy = 0,
     sx = 1,
-    sy = 1
+    sy = 1,
+    scissorX = 0,
+    scissorY = 0,
+    scissorWidth = 0,
+    scissorHeight = 0,
 }
 
 local function transform(x, y)
@@ -13,11 +17,20 @@ end
 
 function Graphics.setScissor(x, y, width, height)
     if x == nil then 
-        love.graphics.setScissor()
+        love.graphics.setScissor(Graphics.scissorX, Graphics.scissorY, Graphics.scissorWidth, Graphics.scissorHeight)
     else
         local newX, newY = transform(x, y)
-        love.graphics.setScissor(newX, newY, width, height)
+        local newWidth = width * Graphics.sx
+        local newHeight = height * Graphics.sy
+        love.graphics.setScissor(newX, newY, newWidth, newHeight)
     end
+end
+
+function Graphics.setViewportScissor(x, y, width, height)
+    Graphics.scissorX, Graphics.scissorY = transform(x, y)
+    Graphics.scissorWidth = width * Graphics.sx
+    Graphics.scissorHeight = height * Graphics.sy
+    love.graphics.setScissor(Graphics.scissorX, Graphics.scissorY, Graphics.scissorWidth, Graphics.scissorHeight)
 end
 
 function Graphics.translate(dx, dy)
