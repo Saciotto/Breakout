@@ -41,23 +41,18 @@ function Ball:setAngle(angle)
     self.dy = velocity * math.sin(angle)
 end
 
-function Ball:hit(side)
-    if side == "bottom" then
-        self.dy = -1 * math.abs(self.dy)
-    elseif side == "top" then
-        self.dy = math.abs(self.dy)
-    elseif side == "left" then
-        self.dx = math.abs(self.dx)
-    elseif side == "right" then
-        self.dx = -1 * math.abs(self.dx)
-    end
-    self.hits = self.hits + 1
-end
-
 function Ball:hitPad(cos)
     local angle = math.pi + math.acos(-1 * cos)
     self:setAngle(angle)
     self.hits = self.hits + 1
+end
+
+function Ball:copy()
+    local ball = Ball:new(self.x, self.y)
+    ball.dx = self.dx
+    ball.dy = self.dy
+    ball.hits = self.hits
+    return ball
 end
 
 return Ball

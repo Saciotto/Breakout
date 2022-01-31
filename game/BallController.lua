@@ -185,4 +185,13 @@ function BallController:setBallPostion(position)
     ball.x = position - ball.width / 2
 end
 
+function BallController:splitBall()
+    local ball = self.screen.balls.children[1]
+    newBall = ball:copy()
+    local angle = ball:getAngle()
+    ball:setAngle(angle + math.pi / 8)
+    newBall:setAngle(angle - math.pi / 8)
+    self.screen.balls:addChild(newBall)
+end
+
 return BallController
