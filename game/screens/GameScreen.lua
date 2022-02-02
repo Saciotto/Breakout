@@ -40,12 +40,14 @@ function GameScreen:load()
     MapManager.importMap(self.grid, self.stage)
 
     self.balls = Entity:new()
+    self.powerUps = Entity:new()
     self.pad = Pad:new()
     self.background = getBackground(self.stage)
     self.entities = {
         self.pad,
         self.balls,
-        self.grid
+        self.grid,
+        self.powerUps
     }
     
     self.stageLabel = Label:new("", {1,1,1}, Fonts.DEJAVU, 20, 10, 0, Constants.SCREEN_WIDTH - 20, 0, "left", "top")

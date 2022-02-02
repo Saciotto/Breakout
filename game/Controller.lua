@@ -12,6 +12,10 @@ function Controller:new(screen)
     return controller
 end
 
+local function testCollision(x1, y1, w1, h1, x2, y2, w2, h2)
+    return (x1 < x2 + w2) and (x1 + w1 > x2) and (y1 < y2 + h2) and (y1 + h1 > y2)
+end
+
 function Controller:gameOver()
     if GameData.lives > 1 then
         self.paused = true
@@ -41,11 +45,23 @@ function Controller:checkObjective()
     end
 end
 
+function Controller:dropPowerUp(brick)
+    local x = brick.x + (brick.width - Constants.POWER_UP_WIDTH) / 2
+    local y = brick.y + (brick.height - Constants.POWER_UP_HEIGHT) / 2
+
+    local powerUp = PowerUp:new(x, y, 'split')
+    self.screen.powerUps:addChild(powerUp)
+end
+
 function Controller:hitBrick(index)
     local brick = self.screen.grid.bricks[index]
     brick:hit()
     if brick.isBroken then
-        GameData.score = GameData.score  + brick.value
+        local rand = math.random(1, 100)
+        if rand <= 10 then
+            self:dropPowerUp(brick)
+        end
+        GameData.score = GameData.score + brick.value
         self.screen.grid:destroyBrick(index)
     end
 end
@@ -57,10 +73,43 @@ function Controller:updateEntities(dt)
     end
 end
 
+function Controller:removeOutOfBoundsPowerUps()
+    for index = #self.screen.powerUps.children, 1, -1 do
+        local entity = self.screen.powerUps.children[index]
+        if entity.y > Constants.SCREEN_HEIGHT then
+            self.screen.powerUps:removeChild(index)
+        end
+    end
+end
+
+function Controller:applyPowerUp(type)
+    if type == "split" then
+        self.ballController:splitBall()
+    end
+end
+
+function Controller:checkPowerUpAndPadColision()
+    local pad = self.screen.pad
+
+    for index = #self.screen.powerUps.children, 1, -1 do
+        local powerUp = self.screen.powerUps.children[index]
+        local bx, by, bw, bh = powerUp:getViewport()
+        local px, py, pw, ph = pad:getViewport()
+
+        local collision = testCollision(bx, by, bw, bh, px, py, pw, ph)
+        if collision then
+            self:applyPowerUp(powerUp.type)
+            self.screen.powerUps:removeChild(index)
+        end
+    end
+end
+
 function Controller:update(dt)
     if not self.paused then
         self:updateEntities(dt)
         self.ballController:update()
+        self:removeOutOfBoundsPowerUps()
+        self:checkPowerUpAndPadColision()
         self:checkObjective()
     else
         local position = self.screen.pad.x + self.screen.pad.width / 2

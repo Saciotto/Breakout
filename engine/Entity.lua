@@ -33,6 +33,7 @@ function Entity:setArea(x, y, width, height)
 end
 
 function Entity:draw()
+    self.drawable.color = self.debugColor
     self.drawable:draw(self:getViewport())
     for k, child in pairs(self.children) do
         child:draw()

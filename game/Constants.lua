@@ -10,6 +10,7 @@ local Constants = {
     BALL_MARGIN = 15,
     BALL_VELOCITY = 300,
     MAX_STAGES = 32,
+    POWER_UP_VELOCITY = 150,
 
     -- Entities
     PAD_WIDTH = 32,
@@ -19,14 +20,12 @@ local Constants = {
     BRICK_HEIGHT = 32,
     BALL_RADIUS = 8,
     BALL_MARGIN = 8,
+    POWER_UP_WIDTH = 24,
+    POWER_UP_HEIGHT = 24,
 
     -- Map
     NO_COLS = 11,
-    NO_ROWS = 7,
-
-    -- Colors
-    COLOR_RED = {1, 0, 0},
-    COLOR_WHITE = {1, 1, 1}
+    NO_ROWS = 7
 }
 
 return Constants
