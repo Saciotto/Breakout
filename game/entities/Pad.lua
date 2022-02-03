@@ -11,19 +11,24 @@ function Pad:new(x, y, debugColor)
     o.sright = Sprites["pad_right"]
     o.len = Constants.PAD_LENGTH
     o.velocity = Constants.PAD_VELOCITY
+    o.transparent = false
     return o
 end
 
-function Pad:getWidth(length)
+function Pad:getWidth()
     return self.width
 end
 
-function Pad:setLenght(length)
-    self.width = Constants.PAD_WIDTH * lenght
+function Pad:setLength(length)
+    self.width = Constants.PAD_WIDTH * length
     self.len = length
 end
 
 function Pad:draw()
+    if self.transparent then
+        return
+    end
+
     -- Error
     if self.len < 2 then
         return

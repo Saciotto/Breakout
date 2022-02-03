@@ -11,6 +11,7 @@ Screen = require("engine.Screen")
 Widget = require("engine.Widget")
 Game = require("engine.Game")
 InputProcessor = require("engine.InputProcessor")
+Timer = require("engine.Timer")
 
 require("engine.drawable.init")
 require("engine.widget.init")

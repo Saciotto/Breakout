@@ -45,11 +45,31 @@ function Controller:checkObjective()
     end
 end
 
+function Controller:getPowerUpType()
+    local powerUps = {
+        "split",
+        "raise",
+        "coin",
+        "life",
+        "slow",
+        "heavy",
+        "shrink",
+        "shrink",
+        "fast",
+        "fast",
+        "invisible",
+        "invisible"
+    }
+    local idx = math.random(1, #powerUps)
+    return powerUps[idx]
+end
+
 function Controller:dropPowerUp(brick)
     local x = brick.x + (brick.width - Constants.POWER_UP_WIDTH) / 2
     local y = brick.y + (brick.height - Constants.POWER_UP_HEIGHT) / 2
 
-    local powerUp = PowerUp:new(x, y, 'split')
+    local type = self:getPowerUpType()
+    local powerUp = PowerUp:new(x, y, type)
     self.screen.powerUps:addChild(powerUp)
 end
 
@@ -82,9 +102,37 @@ function Controller:removeOutOfBoundsPowerUps()
     end
 end
 
+function Controller:setPadTransparent()
+    self.screen.pad.transparent = true
+end
+
+function Controller:setPadOpaque()
+    self.screen.pad.transparent = false
+end
+
 function Controller:applyPowerUp(type)
     if type == "split" then
         self.ballController:splitBall()
+    elseif type == "raise" then
+        self.screen.pad:setLength(5)
+    elseif type == "coin" then
+        GameData.score = GameData.score + 6
+    elseif type == "life" then
+        GameData.lives = GameData.lives + 1
+    elseif type == "shrink" then
+        self.screen.pad:setLength(2)
+    elseif type == "fast" then
+        self.ballController:setAllBallsToSpeedFast()
+    elseif type == "slow" then
+        self.ballController:setAllBallsToSpeedSlow()
+    elseif type == "heavy" then
+        self.ballController:setAllBallsToHeavy()
+        self.timer:removeEvent("heavy")
+        self.timer:addEvent("heavy", 5, self.ballController.setAllBallsToLight, self.ballController)
+    elseif type == "invisible" then
+        self:setPadTransparent()
+        self.timer:removeEvent("invisible")
+        self.timer:addEvent("invisible", 5, self.setPadOpaque, self)
     end
 end
 
@@ -107,6 +155,7 @@ end
 function Controller:update(dt)
     if not self.paused then
         self:updateEntities(dt)
+        self.timer:update(dt)
         self.ballController:update()
         self:removeOutOfBoundsPowerUps()
         self:checkPowerUpAndPadColision()
@@ -125,6 +174,7 @@ end
 function Controller:start()
     self.ballController = BallController:new(self)
     self.ballController:start()
+    self.timer = Timer:new()
 end
 
 return Controller

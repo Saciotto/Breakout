@@ -7,7 +7,8 @@ local Colors = {
     DARK_GREY = {0.2, 0.2, 0.2},
     LIGHT_GREY = {0.5, 0.5, 0.5},
     YELLOW_DARK = {0.55, 0.39, 0.19},
-    YELLOW_LIGHT = {0.99, 0.88, 0.37}
+    YELLOW_LIGHT = {0.99, 0.88, 0.37},
+    GOLD = {1, 0.84, 0}
 }
 
 return Colors

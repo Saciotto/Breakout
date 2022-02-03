@@ -12,6 +12,7 @@ function Ball:new(x, y, velocity, angle)
     ball.dx = velocity * math.cos(angle)
     ball.dy = velocity * math.sin(angle)
     ball.hits = 0
+    ball.heavy = false
     return ball
 end
 

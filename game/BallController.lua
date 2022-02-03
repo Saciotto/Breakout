@@ -17,7 +17,9 @@ end
 
 local function updateBallSpeed(ball)
     local ballSpeed
-    if ball.hits > 20 then 
+    if ball.hits > 1000 then
+        ballSpeed = 2.5
+    elseif ball.hits > 50 then 
         ballSpeed = 2
     elseif ball.hits > 10 then 
         ballSpeed = 1.5
@@ -118,13 +120,15 @@ local function testCollisionWithPad(ball, pad)
     end
 end
 
-local function testCollisionWithBricks(ball, bricks)
+local function testCollisionWithBricks(ball, bricks, heavy)
     local bx, by, bw, bh = ball:getViewport()
     for i = #bricks, 1, -1 do
         local brx, bry, brw, brh = bricks[i]:getViewport()
         local ret, side = testCollision(ball, bx, by, bw, bh, brx, bry, brw, brh)
         if ret then
-            updateBallAfterColision(ball, bricks[i], side)
+            if not heavy then
+                updateBallAfterColision(ball, bricks[i], side)
+            end
             return i
         end
     end
@@ -149,8 +153,8 @@ function BallController:testCollisions(ball)
     local pad = self.screen.pad
 
     testCollisionWithPad(ball, pad)
-    testCollisionWithBricks(ball, metalBricks)
-    local brick = testCollisionWithBricks(ball, bricks)
+    testCollisionWithBricks(ball, metalBricks, false)
+    local brick = testCollisionWithBricks(ball, bricks, ball.heavy)
     if brick > 0 then
         self.game:hitBrick(brick)
     end
@@ -162,6 +166,7 @@ function BallController:update()
 
     for k, ball in pairs(self.screen.balls.children) do
         self:testCollisions(ball)
+        updateBallSpeed(ball)
         if not isInsideTheField(ball) then
             table.insert(lostBalls, k)
         end
@@ -192,6 +197,32 @@ function BallController:splitBall()
     ball:setAngle(angle + math.pi / 8)
     newBall:setAngle(angle - math.pi / 8)
     self.screen.balls:addChild(newBall)
+end
+
+function BallController:setAllBallsToSpeedSlow()
+    for k, ball in pairs(self.screen.balls.children) do
+        ball.hits = 0
+        updateBallSpeed(ball)
+    end
+end
+
+function BallController:setAllBallsToSpeedFast()
+    for k, ball in pairs(self.screen.balls.children) do
+        ball.hits = 1001
+        updateBallSpeed(ball)
+    end
+end
+
+function BallController:setAllBallsToHeavy()
+    for k, ball in pairs(self.screen.balls.children) do
+        ball.heavy = true
+    end
+end
+
+function BallController:setAllBallsToLight()
+    for k, ball in pairs(self.screen.balls.children) do
+        ball.heavy = false
+    end
 end
 
 return BallController
