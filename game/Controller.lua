@@ -169,6 +169,10 @@ end
 
 function Controller:restart()
     self.ballController:start()
+    self.screen.pad:setLength(Constants.PAD_LENGTH)
+    self.screen.powerUps.children = {}
+    self.timer.events = {}
+    self:setPadOpaque()
 end
 
 function Controller:start()

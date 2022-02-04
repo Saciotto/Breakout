@@ -18,6 +18,7 @@ function love.load()
     Animations = AssetsManager.loadAnimations("assets/images/Animations.xml", Sprites)
 
     -- Setup defaults
+    math.randomseed(os.time())
     Label.setDefaultFont(Fonts.DEJAVU, 20)
     Button.setDefualtSprites(Buttons.round_button_blue, Buttons.round_button_blue)
 
