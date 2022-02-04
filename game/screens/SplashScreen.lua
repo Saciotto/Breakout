@@ -8,6 +8,7 @@ function SplashScreen:new()
     label:setFont(Fonts.CHILANKA, 50)
     widgets = {label}
     splashScreen.widgets = widgets
+    GameData.load()
     return splashScreen
 end
 

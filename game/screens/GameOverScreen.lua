@@ -48,6 +48,8 @@ function GameOverScreen:load()
         window,
         label 
     }
+
+    GameData.save()
 end
 
 return GameOverScreen

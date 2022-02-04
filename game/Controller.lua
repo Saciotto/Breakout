@@ -173,6 +173,7 @@ function Controller:restart()
     self.screen.powerUps.children = {}
     self.timer.events = {}
     self:setPadOpaque()
+    GameData.save()
 end
 
 function Controller:start()

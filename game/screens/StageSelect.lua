@@ -50,6 +50,7 @@ function StageSelect:load()
         local button = createStageButton(stage, stage <= self.nextStage)
         table.insert(self.widgets, button)
     end
+    GameData.save()
 end
 
 return StageSelect
