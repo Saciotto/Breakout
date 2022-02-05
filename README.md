@@ -19,10 +19,10 @@ love .
 ## Screenshots
 
 <div float="left">
-    <img src="screenshots/splash-screen.png" width="480">
-    <img src="screenshots/stage-select.png" width="480">
+    <img src="screenshots/splash-screen.png" width="360">
+    <img src="screenshots/stage-select.png" width="360">
 </div>
 <div float="left">
-    <img src="screenshots/stage-5.png" width="480">
-    <img src="screenshots/stage-14.png" width="480">
+    <img src="screenshots/stage-5.png" width="360">
+    <img src="screenshots/stage-14.png" width="360">
 </div>
