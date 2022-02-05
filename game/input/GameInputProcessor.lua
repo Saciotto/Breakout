@@ -13,9 +13,6 @@ function GameInputProcessor:keyPressed(key, unicode)
     if key ~= 'a' and key ~= 'left' and key ~= 'd' and key ~= 'right' then
         game.paused = false
     end
-    if key == 's' then
-        game.ballController:splitBall()
-    end
 end
 
 function GameInputProcessor:mousePressed(x, y, button)

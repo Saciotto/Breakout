@@ -38,7 +38,7 @@ function StageSelect:load()
     self.background = Graphics.newImage("assets/images/SunnyDay.png")
     window = Window:new(134, 100, Constants.SCREEN_WIDTH - 268, Constants.SCREEN_HEIGHT - 200)
 
-    label = Label:new("Level Select", Colors.WHITE, Fonts.CHILANKA, 60, 0, 20, Constants.SCREEN_WIDTH)
+    label = Label:new("Select Level", Colors.WHITE, Fonts.CHILANKA, 60, 0, 20, Constants.SCREEN_WIDTH)
     label:setAlign("center", "top")
 
     self.nextStage = GameData.unlockedStage
