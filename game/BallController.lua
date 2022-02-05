@@ -190,6 +190,34 @@ function BallController:setBallPostion(position)
     ball.x = position - ball.width / 2
 end
 
+local function avoidHorizontalAngle(ball)
+    local angle = ball:getAngle()
+    local diff = angle
+
+    while diff > math.pi do
+        diff = diff - 2 * math.pi
+    end
+    while diff < -1 * math.pi do
+        diff = diff + 2 * math.pi
+    end
+
+    if diff < math.pi * 0.1 and diff > math.pi * -0.1 then
+        if diff >= 0 then
+            angle = math.pi * 0.1
+        else
+            angle = math.pi * -0.1
+        end
+    elseif diff > math.pi * 0.9 or diff < math.pi * -0.9 then
+        if diff >= 0 then
+            angle = math.pi * 0.9
+        else
+            angle = math.pi * -0.9
+        end
+    end
+
+    ball:setAngle(angle)
+end
+
 function BallController:splitBall()
     local ball = self.screen.balls.children[1]
     newBall = ball:copy()
@@ -197,6 +225,8 @@ function BallController:splitBall()
     ball:setAngle(angle + math.pi / 8)
     newBall:setAngle(angle - math.pi / 8)
     self.screen.balls:addChild(newBall)
+    avoidHorizontalAngle(ball)
+    avoidHorizontalAngle(newBall)
 end
 
 function BallController:setAllBallsToSpeedSlow()
