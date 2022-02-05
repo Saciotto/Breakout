@@ -23,7 +23,7 @@ local function createBrick(c, i, j, lenght)
     local brick = {}
     if color == "metal" then
         brick = Brick:new(Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, color, lenght)
-        brick.indestrutible = true
+        brick.lives = 9
     else
         brick = Brick:new(Constants.BRICK_WIDTH * j, Constants.BRICK_HEIGHT * i, color, lenght)
     end

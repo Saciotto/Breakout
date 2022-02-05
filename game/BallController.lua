@@ -149,12 +149,15 @@ end
 
 function BallController:testCollisions(ball)
     local bricks = self.screen.grid.bricks
-    local metalBricks = self.screen.grid.indestructibleBricks
+    local metalBricks = self.screen.grid.metalBricks
     local pad = self.screen.pad
 
     testCollisionWithPad(ball, pad)
-    testCollisionWithBricks(ball, metalBricks, false)
-    local brick = testCollisionWithBricks(ball, bricks, ball.heavy)
+    local brick = testCollisionWithBricks(ball, metalBricks, false)
+    if brick > 0 then
+        self.game:hitMetalBrick(brick)
+    end
+    brick = testCollisionWithBricks(ball, bricks, ball.heavy)
     if brick > 0 then
         self.game:hitBrick(brick)
     end

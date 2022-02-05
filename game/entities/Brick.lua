@@ -11,7 +11,7 @@ function Brick:new(x, y, color, len)
     o.sright = Sprites["brick_" .. color .. "_right"]
     o.ssquare = Sprites["brick_" .. color]
     o.len = len or 1
-    o.indestrutible = false
+    o.lives = 0
     o.isBroken = false
     o.width = o.len * Constants.BRICK_WIDTH
     o.value = o.len
@@ -19,8 +19,10 @@ function Brick:new(x, y, color, len)
 end
 
 function Brick:hit()
-    if not self.indestrutible then
+    if self.lives <= 0 then
         self.isBroken = true
+    else
+        self.lives = self.lives - 1
     end
 end
 

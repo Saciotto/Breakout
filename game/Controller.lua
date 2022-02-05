@@ -78,11 +78,20 @@ function Controller:hitBrick(index)
     brick:hit()
     if brick.isBroken then
         local rand = math.random(1, 100)
-        if rand <= 10 then
+        if rand <= 15 then
             self:dropPowerUp(brick)
         end
         GameData.score = GameData.score + brick.value
         self.screen.grid:destroyBrick(index)
+    end
+end
+
+function Controller:hitMetalBrick(index)
+    local brick = self.screen.grid.metalBricks[index]
+    brick:hit()
+    if brick.isBroken then
+        GameData.score = GameData.score + brick.value
+        self.screen.grid:destroyMetalBrick(index)
     end
 end
 
